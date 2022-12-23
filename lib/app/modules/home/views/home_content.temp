@@ -1,0 +1,133 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../../../routes/app_menu.dart';
+import '../views/home_repository.dart';
+import './home_news_chain.dart';
+
+
+class HomeNewsList extends StatefulWidget {
+  const HomeNewsList({
+    Key? key,
+    required TabController tabController,
+    required this.tabList,
+    required this.pageState,
+  }) : _tabController = tabController, super(key: key);
+
+  final TabController _tabController;
+  final List<String> tabList;
+  final PageTopik pageState;
+
+  @override
+  State<HomeNewsList> createState() => _HomeNewsListState();
+}
+
+class _HomeNewsListState extends State<HomeNewsList> {
+  @override
+  Widget build(BuildContext context) {
+    RefreshController refreshC = RefreshController();
+    return TabBarView(
+        controller: widget._tabController,
+        children: [
+          // for (String str in tabList)
+          ...widget.tabList.map((label) => Builder(
+            builder: (context) {
+              final postData = Provider.of<DataHome>(context);
+              postData.setSubTopik(label);
+              // postData.getReadNewsData();
+              return SmartRefresher(
+                controller: refreshC,
+                enablePullDown: true,
+                onRefresh: () async {
+                  try {
+                    await Future.delayed(const Duration(milliseconds: 1500));
+                    print('Refreshing ...');
+                    postData.setSubTopik(label, true);
+                    setState(() {});
+                    refreshC.refreshCompleted();
+                  } catch (e) {
+                    refreshC.refreshFailed();
+                  }
+                },
+                // header: const ClassicHeader(
+                //   complete: Text("Done"),
+                //   failed: Text("Failed"),
+                //   refresh: Text("Wait"),
+                //   waterDropColor: Colors.black,
+                // ),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 360,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.all(5.0),
+                          scrollDirection: Axis.vertical,
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                            late WebViewController _controller;
+                            // postData.setSubTopik(label);
+                              return postData.loading ?
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  height: 1000,
+                                  child: SpinKitThreeBounce(
+                                    duration: const Duration(seconds: 2),
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: index.isEven ? Colors.black : Colors.grey,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                                : Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                  ),
+                                  height: 1600,
+                                  child: WebView(
+                                    initialUrl: 'about:blank',
+                                    javascriptMode: JavascriptMode.unrestricted,
+                                    onWebViewCreated: (controller) {
+                                      _controller = controller;
+                                      _controller.loadUrl(
+                                        Uri.dataFromString(
+                                          postData.getHtmlView(),
+                                          mimeType: 'text/html',
+                                          encoding: Encoding.getByName('utf-8')
+                                        ).toString()
+                                      );
+                                    },
+                                  ),
+                                );
+                            }
+                          )
+                      ),
+                    ),
+                    Builder(
+                      builder: (context) {
+                        return NewsChain(label: label);
+                      }
+                    ),
+                  ],
+                ),
+              );
+            }
+          )
+        ),
+      ],
+    );
+  }
+}
