@@ -141,7 +141,7 @@ class LoginView extends GetView<LoginController> {
                   }
                 }
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.grey[300],),
+              style: ElevatedButton.styleFrom(primary: Colors.grey[300],),
               child: const Text('LOGIN', style: TextStyle(color: Colors.black),),
             ),
             const SizedBox(height: 20),

@@ -207,7 +207,7 @@ class SignupView extends GetView<SignupController> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[300],
+                primary: Colors.grey[300],
               ),
               child: const Text(
                 'SUBMIT',
