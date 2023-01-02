@@ -32,3 +32,15 @@ flutter:
     - assets/icons/
     - assets/images/
 
+resources:
+  - string.dart
+  - color.dart
+#  -\app_styles.dart  (store all styles i.e. material dark, light, cupertino etc.)
+#  -\app_dimens.dart  (store all dimension constants)
+#
+#  -\components (parent component directory)
+#  -\your_custom_widget.dart(create custom component here)
+#  -\.....
+#
+#  -\views
+#  -\your_view.dart(your view where you import custom component)

@@ -9,6 +9,7 @@ import '../modules/english/views/english_view.dart';
 import '../modules/foto/bindings/foto_binding.dart';
 import '../modules/foto/views/foto_view.dart';
 import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/home_antara.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/infografik/bindings/infografik_binding.dart';
 import '../modules/infografik/views/infografik_view.dart';
@@ -38,7 +39,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => Home(),
       binding: HomeBinding(),
     ),
     GetPage(
