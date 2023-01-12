@@ -2,6 +2,8 @@ import 'package:an_app_vone/app/modules/resource/color.dart';
 import 'package:an_app_vone/app/modules/resource/string.dart';
 import 'package:flutter/material.dart';
 
+import '../../login/views/login_antara.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -27,61 +29,79 @@ class _HomeState extends State<Home> {
       // body: Padding(
       body: Column(
         children: [
-          SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: ExpansionPanelList(
-              expansionCallback: (int index, bool isExpanded) {},
-              children: [
-                ExpansionPanel(
-                  headerBuilder: (BuildContext context, bool isExpanded) {
-                    return const ListTile(
-                      title: Text('Item 1'),
-                    );
-                  },
-                  body: ListTile(
-                    leading: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(1.0),
-                      width: 30,
-                      child: const Text('Bije'),
-                    ),
-                    title: Text('Item 1 child'),
-                    subtitle: Text('Details goes here'),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 52,
+                  color: Colors.transparent,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: ColorClass.GREY_BUTTON,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Pencarian Piala Dunia Hardcode",
+                            style: TextStyle(
+                                fontSize: 11,
+                                color: ColorClass.BLACK_TEXT,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )),
                   ),
-                  isExpanded: true,
                 ),
-                ExpansionPanel(
-                  headerBuilder: (BuildContext context, bool isExpanded) {
-                    return const ListTile(
-                      title: Text('Item 2'),
-                    );
-                  },
-                  body: ListTile(
-                    leading: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(1.0),
-                      width: 30,
-                      child: const Text('Bije'),
-                    ),
-                    title: Text('Item 2 child'),
-                    subtitle: Text('Details goes here'),
+              ),
+              Expanded(
+                child: Container(
+                  height: 52,
+                  color: Colors.transparent,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: Container(
+                        decoration: const BoxDecoration(
+                          color: ColorClass.GREY_BUTTON,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Filter Hardcode",
+                            style: TextStyle(
+                                fontSize: 11,
+                                color: ColorClass.BLACK_TEXT,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )),
                   ),
-                  isExpanded: true,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Expanded(
             child: ListView(
-                children: [Text("TEST1"), Text("TEST2")],
+              children: [Text("TEST1"), Text("TEST2")],
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+              );
+            },
+            child: Text("Go To Login Page"),
+          )
         ],
       ),
     );
   }
 }
-
 
 // class _HomeState extends State<Home> {
 //   @override
@@ -171,3 +191,50 @@ class _HomeState extends State<Home> {
 //     );
 //   }
 // }
+
+// EXPANSION BELOW
+
+// SingleChildScrollView(
+// padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+// child: ExpansionPanelList(
+// expansionCallback: (int index, bool isExpanded) {},
+// children: [
+// ExpansionPanel(
+// headerBuilder: (BuildContext context, bool isExpanded) {
+// return const ListTile(
+// title: Text('Item 1'),
+// );
+// },
+// body: ListTile(
+// leading: Container(
+// alignment: Alignment.center,
+// padding: EdgeInsets.all(1.0),
+// width: 30,
+// child: const Text('Bije'),
+// ),
+// title: Text('Item 1 child'),
+// subtitle: Text('Details goes here'),
+// ),
+// isExpanded: true,
+// ),
+// ExpansionPanel(
+// headerBuilder: (BuildContext context, bool isExpanded) {
+// return const ListTile(
+// title: Text('Item 2'),
+// );
+// },
+// body: ListTile(
+// leading: Container(
+// alignment: Alignment.center,
+// padding: EdgeInsets.all(1.0),
+// width: 30,
+// child: const Text('Bije'),
+// ),
+// title: Text('Item 2 child'),
+// subtitle: Text('Details goes here'),
+// ),
+// isExpanded: true,
+// ),
+// ],
+// ),
+// ),
