@@ -31,4 +31,13 @@ class StringClass {
   static String PEDOMAN_MEDIA_SIBER_TEXT = "Pedoman Media Siber";
   static String RSS_TEXT = "RSS";
   static String NON_LOGIN_TEXT = "Masuk dulu yuk! Kami pilihin konten menarik buat kamu";
+  static String BERITA_GRID_TITLE_TEXT = "Berita";
+  static String BISNIS_GRID_TITLE_TEXT = "Bisnis";
+  static String SPORTS_GRID_TITLE_TEXT = "Sports";
+  static String BOLA_GRID_TITLE_TEXT = "Bola";
+  static String LIFESTYLE_GRID_TITLE_TEXT = "Lifestyle";
+  static String FOTO_GRID_TITLE_TEXT = "Foto";
+  static String VIDEO_GRID_TITLE_TEXT = "Video";
+  static String ANTARA_GRAFIK_GRID_TITLE_TEXT = "AntaraGrafik";
+  static String MORE_GRID_TITLE_TEXT = "More";
 }

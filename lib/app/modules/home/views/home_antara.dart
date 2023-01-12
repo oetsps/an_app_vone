@@ -38,13 +38,13 @@ class _HomeState extends State<Home> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: ColorClass.GREY_BUTTON,
                           borderRadius: BorderRadius.all(
                             Radius.circular(8),
                           ),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "Pencarian Piala Dunia Hardcode",
                             style: TextStyle(
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                   height: 52,
                   color: Colors.transparent,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Container(
                         decoration: const BoxDecoration(
                           color: ColorClass.GREY_BUTTON,

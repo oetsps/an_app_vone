@@ -1,3 +1,4 @@
+import 'package:an_app_vone/app/modules/rubrik/rubrik_antara.dart';
 import 'package:flutter/material.dart';
 
 import '../../resource/color.dart';
@@ -200,7 +201,14 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
                 accountEmail: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Rubrik(),
+                      ),
+                    );
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

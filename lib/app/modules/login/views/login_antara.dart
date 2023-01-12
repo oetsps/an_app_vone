@@ -217,7 +217,6 @@ class _LoginState extends State<Login> {
                               fontWeight: FontWeight.w600),
                         ),
                         onPressed: () {
-                          //signup screen
                           Navigator.push(
                             context,
                             MaterialPageRoute(
