@@ -14,8 +14,10 @@ class StringClass {
   static String BUTTON_LOGIN_TEXT_GOOGLE = "Masuk dengan Google";
   static String BUTTON_SIGNUP_TEXT_GOOGLE = "Daftar dengan Google";
   static String AKUN_TEXT = "Belum punya akun? Yuk!";
+  static String AKUN3_TEXT = "Belum punya akun?";
   static String AKUN2_TEXT = "Sudah punya akun? Yuk!";
   static String DAFTAR_SEKARANG_TEXT = "Daftar Sekarang";
+  static String DAFTAR_DISINI_TEXT = "Daftar disini!";
   static String MASUK_SEKARANG_TEXT = "Masuk Sekarang";
   static String LUPA_PASSWORD_TEXT = "Lupa Password?";
   static String KLIK_DISINI_TEXT = "Klik Disini";
@@ -31,6 +33,8 @@ class StringClass {
   static String PEDOMAN_MEDIA_SIBER_TEXT = "Pedoman Media Siber";
   static String RSS_TEXT = "RSS";
   static String NON_LOGIN_TEXT = "Masuk dulu yuk! Kami pilihin konten menarik buat kamu";
+  static String NON_LOGIN_IN_SAVEDNEWS_PAGE_TEXT = "Masuk dulu yuk!";
+  static String NON_LOGIN_DESC_IN_SAVEDNEWS_PAGE_TEXT = "Untuk bisa nikmatin fitur ini, kamu harus login terlebih dahulu. Kamu bisa baca berita yang belum sempat kamu baca atau baca ulang berita yang pernah kamu baca";
   static String BERITA_GRID_TITLE_TEXT = "Berita";
   static String BISNIS_GRID_TITLE_TEXT = "Bisnis";
   static String SPORTS_GRID_TITLE_TEXT = "Sports";

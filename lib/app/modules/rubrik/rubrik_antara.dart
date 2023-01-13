@@ -1,5 +1,6 @@
 import 'package:an_app_vone/app/modules/resource/color.dart';
 import 'package:an_app_vone/app/modules/resource/string.dart';
+import 'package:an_app_vone/app/modules/savednews/savednews_antara.dart';
 import 'package:flutter/material.dart';
 
 class Rubrik extends StatefulWidget {
@@ -15,9 +16,11 @@ class _RubrikState extends State<Rubrik> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
                 'assets/images/logo.png',
@@ -38,7 +41,23 @@ class _RubrikState extends State<Rubrik> {
             choices.length,
             (index) {
               return Center(
-                child: SelectCard(choice: choices[index]),
+                child: GestureDetector(
+                  onTap: () {
+                    // on tap goes here
+                    print("check item clicked : $index");
+                    if(index==0){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SavedNews(),
+                        ),
+                      );
+                    }
+                  },
+                  child: SelectCard(
+                    choice: choices[index],
+                  ),
+                ),
               );
             },
           ),
@@ -110,5 +129,3 @@ class SelectCard extends StatelessWidget {
     );
   }
 }
-
-

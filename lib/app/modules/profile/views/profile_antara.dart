@@ -19,9 +19,11 @@ class _ProfileState extends State<Profile> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
                 'assets/images/logo.png',
@@ -273,15 +275,19 @@ class _ProfileState extends State<Profile> {
                     ),
                     Row(
                       children: [
-                        buildTextButtonWOIcon(StringClass.DAFTAR_TEXT,
-                            ColorClass.BLACK_OUTLINE_AVATAR, Colors.white),
+                        buildTextButtonWOIcon(
+                          StringClass.DAFTAR_TEXT,
+                          ColorClass.BLACK_OUTLINE_AVATAR,
+                          Colors.white,
+                        ),
                         const SizedBox(
                           width: 8,
                         ),
                         buildTextButtonWOIcon(
-                            StringClass.MASUK_TEXT,
-                            Colors.white,
-                            ColorClass.BLACK_BUTTON_BACKGROUND_COLOR),
+                          StringClass.MASUK_TEXT,
+                          Colors.white,
+                          ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
+                        ),
                       ],
                     )
                   ],

@@ -25,13 +25,20 @@ class _SignUpState extends State<SignUp> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset('assets/images/logo.png', fit: BoxFit.cover),
-              Image.asset('assets/images/text_antara_appbar.png',
-                  fit: BoxFit.cover),
+              Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.cover,
+              ),
+              Image.asset(
+                'assets/images/text_antara_appbar.png',
+                fit: BoxFit.cover,
+              ),
             ],
           ),
         ),
