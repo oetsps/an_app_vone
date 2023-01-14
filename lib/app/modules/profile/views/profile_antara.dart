@@ -54,34 +54,27 @@ class _ProfileState extends State<Profile> {
                         color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
                       ),
                     ),
-                    buildTextButton(
-                      'assets/icons/icon_press_release.png',
-                      StringClass.PRESS_RILIS_TEXT,
-                    ),
-                    buildTextButton(
-                      'assets/icons/icon_jaringan.png',
-                      StringClass.JARINGAN_TEXT,
-                    ),
-                    buildTextButton(
-                      'assets/icons/icon_ketentuan_hukum.png',
-                      StringClass.KETENTUAN_HUKUM_TEXT,
-                    ),
-                    buildTextButton(
-                      'assets/icons/icon_kebijakan_privasi.png',
-                      StringClass.KEBIJAKAN_PRIVASI_TEXT,
-                    ),
-                    buildTextButton(
-                      'assets/icons/icon_tentang_kami.png',
-                      StringClass.TENTANG_KAMI_TEXT,
-                    ),
-                    buildTextButton(
-                      'assets/icons/icon_pedoman_media_siber.png',
-                      StringClass.PEDOMAN_MEDIA_SIBER_TEXT,
-                    ),
-                    buildTextButton(
-                      'assets/icons/icon_rss.png',
-                      StringClass.RSS_TEXT,
-                    ),
+                    BuildTextButton(
+                        iconFile: 'assets/icons/icon_press_release.png',
+                        judul: StringClass.PRESS_RILIS_TEXT),
+                    BuildTextButton(
+                        iconFile: 'assets/icons/icon_jaringan.png',
+                        judul: StringClass.JARINGAN_TEXT),
+                    BuildTextButton(
+                        iconFile: 'assets/icons/icon_ketentuan_hukum.png',
+                        judul: StringClass.KETENTUAN_HUKUM_TEXT),
+                    BuildTextButton(
+                        iconFile: 'assets/icons/icon_kebijakan_privasi.png',
+                        judul: StringClass.KEBIJAKAN_PRIVASI_TEXT),
+                    BuildTextButton(
+                        iconFile: 'assets/icons/icon_tentang_kami.png',
+                        judul: StringClass.TENTANG_KAMI_TEXT),
+                    BuildTextButton(
+                        iconFile: 'assets/icons/icon_pedoman_media_siber.png',
+                        judul: StringClass.PEDOMAN_MEDIA_SIBER_TEXT),
+                    BuildTextButton(
+                        iconFile: 'assets/icons/icon_rss.png',
+                        judul: StringClass.RSS_TEXT),
                   ],
                 ),
               ),
@@ -92,31 +85,31 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  TextButton buildTextButton(String iconFile, String judul) {
-    return TextButton(
-      onPressed: () {},
-      style: TextButton.styleFrom(padding: EdgeInsets.zero),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Image.asset(
-            iconFile,
-            fit: BoxFit.contain,
-          ),
-          const SizedBox(
-            width: 4,
-          ),
-          Text(
-            judul,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // TextButton buildTextButton(String iconFile, String judul) {
+  //   return TextButton(
+  //     onPressed: () {},
+  //     style: TextButton.styleFrom(padding: EdgeInsets.zero),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       children: [
+  //         Image.asset(
+  //           iconFile,
+  //           fit: BoxFit.contain,
+  //         ),
+  //         const SizedBox(
+  //           width: 4,
+  //         ),
+  //         Text(
+  //           judul,
+  //           style: const TextStyle(
+  //             fontWeight: FontWeight.w400,
+  //             color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   TextButton buildTextButtonWOIcon(
       String judul, Color backgroundColor, Color textColor) {
@@ -202,49 +195,18 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                accountEmail: TextButton(
-                  onPressed: () {
+                accountEmail: TextButtonWOutline(
+                  text: StringClass.PENGATURAN_AKUN_TEXT,
+                  icon: 'assets/icons/icon_setting.png',
+                  icon2: "",
+                  functionOnPress: {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const Rubrik(),
                       ),
-                    );
+                    )
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 16,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(3),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/icons/icon_setting.png',
-                              fit: BoxFit.contain,
-                            ),
-                            Text(
-                              StringClass.PENGATURAN_AKUN_TEXT,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ),
@@ -299,5 +261,116 @@ class _ProfileState extends State<Profile> {
       // default: null;
     }
     return null;
+  }
+}
+
+class TextButtonWOutline extends StatelessWidget {
+  const TextButtonWOutline(
+      {Key? key,
+      required this.icon,
+      required this.icon2,
+      required this.text,
+      required this.functionOnPress})
+      : super(key: key);
+
+  final String text;
+  final String icon;
+  final String icon2;
+  final dynamic functionOnPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        functionOnPress;
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(3),
+              ),
+            ),
+            child: Row(
+              children: [
+                Image.asset(
+                  icon,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  text,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
+                  ),
+                ),
+                if (icon2 != "") ...[
+                  Visibility(
+                    visible: true,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 4),
+                      child: Image.asset(
+                        icon2,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ]
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BuildTextButton extends StatelessWidget {
+  const BuildTextButton({
+    Key? key,
+    required this.iconFile,
+    required this.judul,
+  }) : super(key: key);
+
+  final String iconFile;
+  final String judul;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(padding: EdgeInsets.zero),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Image.asset(
+            iconFile,
+            fit: BoxFit.contain,
+          ),
+          const SizedBox(
+            width: 4,
+          ),
+          Text(
+            judul,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

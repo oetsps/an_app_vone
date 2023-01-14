@@ -11,4 +11,5 @@ class ColorClass {
   static const Color TEXT_COLOR_BUTTON_GOOGLE = Color(0xFF101755);
   static const Color DAFTAR_SEKARANG_TEXT_COLOR = Color(0xFF3E4EE1);
   static const Color RED_TEXT_COLOR = Color(0xFFAB0008);
+  static const Color WHITE_COLOR = Color(0xFFFAFAFA);
 }

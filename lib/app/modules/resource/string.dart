@@ -44,4 +44,5 @@ class StringClass {
   static String VIDEO_GRID_TITLE_TEXT = "Video";
   static String ANTARA_GRAFIK_GRID_TITLE_TEXT = "AntaraGrafik";
   static String MORE_GRID_TITLE_TEXT = "More";
+  static String FILTER_TEXT = "Filter";
 }

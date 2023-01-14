@@ -1,5 +1,6 @@
 import 'package:an_app_vone/app/modules/resource/color.dart';
 import 'package:an_app_vone/app/modules/resource/string.dart';
+import 'package:an_app_vone/app/modules/search/search_antara.dart';
 import 'package:flutter/material.dart';
 
 import '../../login/views/login_antara.dart';
@@ -42,23 +43,26 @@ class _HomeState extends State<Home> {
                   height: 52,
                   color: Colors.transparent,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Container(
-                        decoration: const BoxDecoration(
-                          color: ColorClass.GREY_BUTTON,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8),
+                      decoration: const BoxDecoration(
+                        color: ColorClass.GREY_BUTTON,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Pencarian Piala Dunia Hardcode",
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: ColorClass.BLACK_TEXT,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        child: const Center(
-                          child: Text(
-                            "Pencarian Piala Dunia Hardcode",
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: ColorClass.BLACK_TEXT,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -67,7 +71,8 @@ class _HomeState extends State<Home> {
                   height: 52,
                   color: Colors.transparent,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Container(
                         decoration: const BoxDecoration(
                           color: ColorClass.GREY_BUTTON,
@@ -98,10 +103,10 @@ class _HomeState extends State<Home> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Login()),
+                MaterialPageRoute(builder: (context) => const Search()),
               );
             },
-            child: Text("Go To Login Page"),
+            child: Text("Go To Search Page"),
           )
         ],
       ),
