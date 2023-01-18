@@ -71,15 +71,13 @@ class _SearchState extends State<Search> {
                   icon: "assets/icons/icon_filter.png",
                   text: StringClass.FILTER_TEXT,
                   icon2: "assets/icons/icon_down_arrow.png",
-                  functionOnPress: {
-                    //popup bottom drawer
-                  },
+                  determineAction: "PoppingOutBottomSheet",
                 ),
               ],
             ),
             Expanded(
               child: ListView(
-                children: [Text("TEST1"), Text("TEST2")],
+                children: [Text("TEST1"), Text("TEST2"), Text("TEST3")],
               ),
             ),
             ElevatedButton(
@@ -94,6 +92,22 @@ class _SearchState extends State<Search> {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+class MyFloatingActionButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        showBottomSheet(
+            context: context,
+            builder: (context) => Container(
+              color: Colors.red,
+            ));
+      },
     );
   }
 }

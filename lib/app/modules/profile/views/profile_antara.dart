@@ -199,14 +199,7 @@ class _ProfileState extends State<Profile> {
                   text: StringClass.PENGATURAN_AKUN_TEXT,
                   icon: 'assets/icons/icon_setting.png',
                   icon2: "",
-                  functionOnPress: {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Rubrik(),
-                      ),
-                    )
-                  },
+                  determineAction: "GoToRubrikPage",
                 ),
               ),
             ),
@@ -265,24 +258,68 @@ class _ProfileState extends State<Profile> {
 }
 
 class TextButtonWOutline extends StatelessWidget {
-  const TextButtonWOutline(
-      {Key? key,
-      required this.icon,
+  TextButtonWOutline(
+      {required this.icon,
       required this.icon2,
       required this.text,
-      required this.functionOnPress})
-      : super(key: key);
+      required this.determineAction});
 
   final String text;
   final String icon;
   final String icon2;
-  final dynamic functionOnPress;
+  final String determineAction;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        functionOnPress;
+        if (determineAction == "GoToRubrikPage") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Rubrik(),
+            ),
+          );
+        } else if (determineAction == "PoppingOutBottomSheet") {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Photo'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Music'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.videocam),
+                    title: new Text('Video'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.share),
+                    title: new Text('Share'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
