@@ -12,4 +12,5 @@ class ColorClass {
   static const Color DAFTAR_SEKARANG_TEXT_COLOR = Color(0xFF3E4EE1);
   static const Color RED_TEXT_COLOR = Color(0xFFAB0008);
   static const Color WHITE_COLOR = Color(0xFFFAFAFA);
+  static const Color RED_TAB_BAR = Color(0xFFA30930);
 }

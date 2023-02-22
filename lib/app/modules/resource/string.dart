@@ -45,4 +45,26 @@ class StringClass {
   static String ANTARA_GRAFIK_GRID_TITLE_TEXT = "AntaraGrafik";
   static String MORE_GRID_TITLE_TEXT = "More";
   static String FILTER_TEXT = "Filter";
+  static String URUTKAN_TEXT = "Urutkan";
+  static String NUSANTARA_TEXT = "Nusantara";
+  static String TERBARU_TEXT = "Terbaru";
+  static String TERLAMA_TEXT = "Terlama";
+  static String PALING_BANYAK_DIBACA_TEXT = "Paling Banyak Dibaca";
+  static String PALING_BANYAK_DISUKAI_TEXT = "Paling Banyak Disukai";
+  static String SEMUA_TEXT = "Semua";
+  static String ACEH_TEXT = "Aceh";
+  static String BALI_TEXT = "Bali";
+  static String BANGKA_TEXT = "Bangka/Belitung";
+  static String BANTEN_TEXT = "Banten";
+  static String BENGKULU_TEXT = "Bengkulu";
+  static String GORONTALO_TEXT = "Gorontalo";
+  static String JAMBI_TEXT = "Jambi";
+  static String JAWABARAT_TEXT = "Jawa Barat";
+  static String JAWATENGAH_TEXT = "Jawa Tengah";
+  static String JAWATIMUR_TEXT = "Jawa Timur";
+  static String KALIMANTANBARAT_TEXT = "Kalimantan Barat";
+  static String KALIMANTANSELATAN_TEXT = "Kalimantan Selatan";
+  static String KALIMANTANTENGAH_TEXT = "Kalimantan Tengah";
+  static String KALIMANTANTIMUR_TEXT = "Kalimantan Timur";
+  static String TAMPILKAN_HASIL_TEXT = "Tampilkan Hasil";
 }

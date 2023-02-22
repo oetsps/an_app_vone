@@ -43,8 +43,6 @@ class _RubrikState extends State<Rubrik> {
               return Center(
                 child: GestureDetector(
                   onTap: () {
-                    // on tap goes here
-                    print("check item clicked : $index");
                     if(index==0){
                       Navigator.push(
                         context,

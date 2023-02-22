@@ -67,7 +67,7 @@ class _SearchState extends State<Search> {
                     ),
                   ),
                 ),
-                TextButtonWOutline(
+                TextButtonWOutline2(
                   icon: "assets/icons/icon_filter.png",
                   text: StringClass.FILTER_TEXT,
                   icon2: "assets/icons/icon_down_arrow.png",

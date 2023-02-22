@@ -1,5 +1,6 @@
 import 'package:an_app_vone/app/modules/rubrik/rubrik_antara.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../resource/color.dart';
 import '../../resource/string.dart';
@@ -85,32 +86,6 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  // TextButton buildTextButton(String iconFile, String judul) {
-  //   return TextButton(
-  //     onPressed: () {},
-  //     style: TextButton.styleFrom(padding: EdgeInsets.zero),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.start,
-  //       children: [
-  //         Image.asset(
-  //           iconFile,
-  //           fit: BoxFit.contain,
-  //         ),
-  //         const SizedBox(
-  //           width: 4,
-  //         ),
-  //         Text(
-  //           judul,
-  //           style: const TextStyle(
-  //             fontWeight: FontWeight.w400,
-  //             color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   TextButton buildTextButtonWOIcon(
       String judul, Color backgroundColor, Color textColor) {
     return TextButton(
@@ -195,7 +170,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                accountEmail: TextButtonWOutline(
+                accountEmail: TextButtonWOutline2(
                   text: StringClass.PENGATURAN_AKUN_TEXT,
                   icon: 'assets/icons/icon_setting.png',
                   icon2: "",
@@ -257,8 +232,8 @@ class _ProfileState extends State<Profile> {
   }
 }
 
-class TextButtonWOutline extends StatelessWidget {
-  TextButtonWOutline(
+class TextButtonWOutline2 extends StatefulWidget {
+  const TextButtonWOutline2(
       {required this.icon,
       required this.icon2,
       required this.text,
@@ -270,50 +245,133 @@ class TextButtonWOutline extends StatelessWidget {
   final String determineAction;
 
   @override
+  State<TextButtonWOutline2> createState() => _TextButtonWOutline2State();
+}
+
+class _TextButtonWOutline2State extends State<TextButtonWOutline2> {
+  List selectedIndexList = [];
+  @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = size.width / 2;
+
     return TextButton(
       onPressed: () {
-        if (determineAction == "GoToRubrikPage") {
+        if (widget.determineAction == "GoToRubrikPage") {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const Rubrik(),
             ),
           );
-        } else if (determineAction == "PoppingOutBottomSheet") {
+        } else if (widget.determineAction == "PoppingOutBottomSheet") {
           showModalBottomSheet(
             context: context,
             builder: (context) {
               return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+                mainAxisSize: MainAxisSize.max,
+                children: [
                   ListTile(
-                    leading: new Icon(Icons.photo),
-                    title: new Text('Photo'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                    title: Text(
+                      StringClass.FILTER_TEXT,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: ColorClass.BLACK_TEXT,
+                      ),
+                    ),
                   ),
                   ListTile(
-                    leading: new Icon(Icons.music_note),
-                    title: new Text('Music'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                    title: Text(
+                      StringClass.URUTKAN_TEXT,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: ColorClass.BLACK_TEXT,
+                      ),
+                    ),
                   ),
                   ListTile(
-                    leading: new Icon(Icons.videocam),
-                    title: new Text('Video'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                    title: GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 4,
+                      childAspectRatio: (itemWidth / itemHeight) * 4,
+                      children: List.generate(
+                        filter.length,
+                        (index) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (selectedIndexList.contains(index)) {
+                                  selectedIndexList.remove(index);
+                                } else {
+                                  selectedIndexList.add(index);
+                                }
+                                print("check value selectedIndexList: $selectedIndexList");
+                              });
+                            },
+                            child: SelectCardFilter(
+                              filter: filter[index],
+                              selectedIndex: index,
+                              selectedList: selectedIndexList,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                   ListTile(
-                    leading: new Icon(Icons.share),
-                    title: new Text('Share'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                    title: Text(
+                      StringClass.NUSANTARA_TEXT,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: ColorClass.BLACK_TEXT,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GridView.count(
+                          shrinkWrap: true,
+                          crossAxisCount: 5,
+                          childAspectRatio: (itemWidth / itemHeight) * 4,
+                          children: List.generate(
+                            filterDaerah.length,
+                            (index) {
+                              return GestureDetector(
+                                  // child: SelectCardFilter(
+                                  //   filter: filterDaerah[index],
+                                  // ),
+                                  // onTap: () {
+                                  //   setState(() {
+                                  //
+                                  //   });
+                                  // },
+                                  );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListTile(
+                    title: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          primary: ColorClass.BLACK_TEXT_2),
+                      child: Text(
+                        StringClass.TAMPILKAN_HASIL_TEXT,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               );
@@ -340,26 +398,26 @@ class TextButtonWOutline extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(
-                  icon,
+                  widget.icon,
                   fit: BoxFit.contain,
                 ),
                 const SizedBox(
                   width: 4,
                 ),
                 Text(
-                  text,
+                  widget.text,
                   style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     color: ColorClass.BLACK_BUTTON_BACKGROUND_COLOR,
                   ),
                 ),
-                if (icon2 != "") ...[
+                if (widget.icon2 != "") ...[
                   Visibility(
                     visible: true,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 4),
+                      padding: const EdgeInsets.only(left: 4),
                       child: Image.asset(
-                        icon2,
+                        widget.icon2,
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -407,6 +465,84 @@ class BuildTextButton extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Filter {
+  const Filter({this.title});
+  final String? title;
+}
+
+List<Filter> filter = <Filter>[
+  Filter(title: StringClass.TERBARU_TEXT),
+  Filter(title: StringClass.TERLAMA_TEXT),
+  Filter(title: StringClass.PALING_BANYAK_DIBACA_TEXT),
+  Filter(title: StringClass.PALING_BANYAK_DISUKAI_TEXT),
+];
+
+class FilterDaerah {
+  const FilterDaerah({this.title});
+  final String? title;
+}
+
+List<FilterDaerah> filterDaerah = <FilterDaerah>[
+  FilterDaerah(title: StringClass.SEMUA_TEXT),
+  FilterDaerah(title: StringClass.ACEH_TEXT),
+  FilterDaerah(title: StringClass.BALI_TEXT),
+  FilterDaerah(title: StringClass.BANGKA_TEXT),
+  FilterDaerah(title: StringClass.BANTEN_TEXT),
+  FilterDaerah(title: StringClass.BENGKULU_TEXT),
+  FilterDaerah(title: StringClass.GORONTALO_TEXT),
+  FilterDaerah(title: StringClass.JAMBI_TEXT),
+  FilterDaerah(title: StringClass.JAWABARAT_TEXT),
+  FilterDaerah(title: StringClass.JAWATENGAH_TEXT),
+  FilterDaerah(title: StringClass.JAWATIMUR_TEXT),
+  FilterDaerah(title: StringClass.KALIMANTANBARAT_TEXT),
+  FilterDaerah(title: StringClass.KALIMANTANSELATAN_TEXT),
+  FilterDaerah(title: StringClass.KALIMANTANTENGAH_TEXT),
+  FilterDaerah(title: StringClass.KALIMANTANTIMUR_TEXT),
+];
+
+class SelectCardFilter extends StatelessWidget {
+  const SelectCardFilter(
+      {Key? key, required this.filter,
+       required this.selectedIndex,
+       required this.selectedList})
+      : super(key: key);
+  final dynamic filter;
+  final int selectedIndex;
+  final List selectedList;
+
+  @override
+  Widget build(BuildContext context) {
+    print("checki checki beibih : $selectedList");
+    return Card(
+      elevation: 0,
+      // color: Colors.white,
+      color: selectedList.contains(selectedIndex) ? Colors.black : Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(3),
+        side: BorderSide(
+          // color: Colors.black,
+          color: selectedList.contains(selectedIndex)
+              ? Colors.white
+              : Colors.black,
+          width: 1,
+        ),
+      ),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              filter.title ?? "",
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

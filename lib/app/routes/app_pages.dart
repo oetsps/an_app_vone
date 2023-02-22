@@ -39,7 +39,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => Home(),
       binding: HomeBinding(),
     ),
     GetPage(
