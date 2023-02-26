@@ -40,60 +40,63 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       create: ((context) => DataHome()),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(/*brightness: Brightness.dark, */primaryColor: Colors.red, primarySwatch: Colors.blue),
+          // theme: ThemeData(/*brightness: Brightness.dark, */primaryColor: Colors.red, primarySwatch: Colors.blue),
           home: DefaultTabController(
             length: pageState.subTopikLength(),
             child: Scaffold(
-              body: NestedScrollView(
-                headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-                  // final postData = Provider.of<DataHome>(context);
-                  return [
-                    SliverAppBar(
-                      leading: PopupMenuButton(
-                        color: const Color.fromARGB(255, 241, 220, 218),
-                        icon: const Icon(Icons.list),
-                        itemBuilder: (context) =>
-                            // userLog ? popupMenuLoggedIn : popupMenu,
-                            authC.getLoginStatus() ? popupMenuLoggedIn : popupMenu,
-                        onSelected: (String newValue) {
-                          if (newValue != routeTopik) {
-                            // Navigator.of(context).pushNamed(newValue);
-                            Get.offAllNamed(newValue);
-                          }
-                        },
-                      ),
-                      expandedHeight: 200.0,
-                      floating: true,
-                      pinned: true,
-                      snap: true,
-                      actionsIconTheme: const IconThemeData(opacity: 0.7),
-                      title: Text(
-                        pageState.getName(),
-                        style: const TextStyle(color: Colors.orangeAccent),
-                      ),
-                      actions: [
-                        IconButton(
-                          color: Colors.white,
-                          icon: const Icon(Icons.search),
-                          onPressed: () {
-                            showSearch(
-                              context: context,
-                              delegate: CustomSearchDelegate(),
-                            );
-                          },
-                        ),
-                      ],
-                      flexibleSpace: Stack(
-                        children: <Widget>[
-                          Positioned.fill(
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 70,
+                    padding: const EdgeInsets.only(left: 10, top: 20),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 30,
+                            padding: const EdgeInsets.all(4),
                             child: Image.asset(
-                              'assets/images/antara_bg.png',
-                              fit: BoxFit.cover,
+                              'assets/images/antara-id.png',
+                              fit: BoxFit.contain,
                             ),
                           ),
-                        ],
-                      ),
-                      bottom: TabBar(
+                        ),
+                        SizedBox(
+                          child: IconButton(
+                            icon: const Icon(Icons.search),
+                            onPressed: () {
+                              showSearch(
+                                context: context,
+                                delegate: CustomSearchDelegate(),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          child: PopupMenuButton(
+                            icon: const Icon(Icons.list),
+                            itemBuilder: (context) =>
+                              // userLog ? popupMenuLoggedIn : popupMenu,
+                              authC.getLoginStatus() ? popupMenuLoggedIn : popupMenu,
+                            onSelected: (String newValue) {
+                              if (newValue != routeTopik) {
+                                // Navigator.of(context).pushNamed(newValue);
+                                Get.offAllNamed(newValue);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 34,
+                    color: Color.fromARGB(255, 156, 27, 18),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: TabBar(
+                        indicatorSize: TabBarIndicatorSize.label,
                         controller: _tabController,
                         indicatorColor: Colors.orangeAccent,
                         indicatorWeight: 4,
@@ -101,13 +104,16 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                         tabs: [
                           ...tabList.map((label) => Tab(
                                 child: Text(label),
+                                // height: 30,
                               )),
                         ],
                       ),
                     ),
-                  ];
-                },
-                body: HomeNewsList(tabController: _tabController, tabList: tabList, pageState: pageState),
+                  ),
+                  Expanded(
+                    child: HomeNewsList(tabController: _tabController, tabList: tabList, pageState: pageState),
+                  ),
+                ],
               ),
             ),
           ),

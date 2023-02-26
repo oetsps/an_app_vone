@@ -10,7 +10,7 @@ import '../modules/foto/bindings/foto_binding.dart';
 import '../modules/foto/views/foto_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_antara.dart';
-import '../modules/home/views/home_view.dart';
+import '../modules/home/views/home_view_first.dart';
 import '../modules/infografik/bindings/infografik_binding.dart';
 import '../modules/infografik/views/infografik_view.dart';
 import '../modules/lifestyle/bindings/lifestyle_binding.dart';
