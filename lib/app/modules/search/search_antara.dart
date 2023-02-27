@@ -1,9 +1,11 @@
-import 'package:an_app_vone/app/modules/profile/views/profile_antara.dart';
+import 'dart:convert';
+
+import 'package:an_app_vone/app/data/mockdata/dummy.dart';
 import 'package:an_app_vone/app/modules/resource/color.dart';
 import 'package:an_app_vone/app/modules/resource/string.dart';
 import 'package:flutter/material.dart';
-
-import '../login/views/login_antara.dart';
+import 'package:get/get.dart';
+import '../../routes/custom_bottomsheet.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -81,41 +83,109 @@ class _SearchState extends State<Search> {
                   ),
                 ],
               ),
+              GridView.builder(
+                itemCount: images.length,
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(3),
+                      child: Image.asset(
+                        images[index],
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  );
+                },
+              ),
               Expanded(
-                child: GridView.builder(
-                  itemCount: images.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(3),
-                        child: Image.asset(
-                          images[index],
-                          fit: BoxFit.fill,
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Image.network(
+                          jsonEncode(Dummy.get_news[index]['photo_medium'])
+                              .replaceAll("\"", "")),
+                      title: Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          jsonEncode(Dummy.get_news[index]['title'])
+                              .replaceAll("\"", ""),
                         ),
+                      ),
+                      subtitle: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(right: 4),
+                                child: Text("Berita"),
+                              ),
+                              GestureDetector(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 4),
+                                  child:
+                                      Image.asset('assets/icons/ic_heart.png'),
+                                ),
+                                onTap: () {},
+                              ),
+                              GestureDetector(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 4),
+                                  child:
+                                      Image.asset('assets/icons/ic_chat.png'),
+                                ),
+                                onTap: () {},
+                              ),
+                              GestureDetector(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 4),
+                                  child:
+                                      Image.asset('assets/icons/ic_send.png'),
+                                ),
+                                onTap: () {},
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 4),
+                                  child:
+                                      Image.asset('assets/icons/ic_time.png'),
+                                ),
+                                onTap: () {},
+                              ),
+                              Text("17 Menit")
+                            ],
+                          )
+                        ],
                       ),
                     );
                   },
+                  itemCount: Dummy.get_news.length,
                 ),
               ),
-              Expanded(
-                child: ListView(
-                  children: [Text("TEST1"), Text("TEST2"), Text("TEST3")],
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Login()),
-                  );
-                },
-                child: Text("Go To Login Page"),
-              )
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => const Login()),
+              //     );
+              //   },
+              //   child: Text("Go To Login Page"),
+              // )
             ],
           ),
         ),
