@@ -83,6 +83,13 @@ class DataHome extends ChangeNotifier {
       }
 
       for (int i = 0; i < repGetNews[curSubTopikIdx]!.data.length; i++) {
+        if (repGetNews[curSubTopikIdx]!.data[i].photo_big == '') {
+          repGetNews[curSubTopikIdx]!.data.removeAt(i);
+          --i;
+        }
+      }
+
+      for (int i = 0; i < repGetNews[curSubTopikIdx]!.data.length; i++) {
         String url = requestAnApi.requestAnNews(
           action: 'read_news',
           category: curSubTopik,

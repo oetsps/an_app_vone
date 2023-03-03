@@ -68,13 +68,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LIFESTYLE,
-      page: () => LifestyleView(),
-      binding: LifestyleBinding(),
+      // page: () => LifestyleView(),
+      // binding: LifestyleBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.FOTO,
-      page: () => FotoView(),
-      binding: FotoBinding(),
+      // page: () => FotoView(),
+      // binding: FotoBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.VIDEO,

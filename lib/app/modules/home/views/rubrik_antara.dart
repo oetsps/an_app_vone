@@ -59,6 +59,7 @@ class _RubrikViewState extends State<RubrikView> {
                         return Center(
                           child: GestureDetector(
                             onTap: () {
+                              var reDirect = true;
                               switch(index) {
                                 case 0:
                                   anTopik = AppTopik.Berita;
@@ -80,13 +81,23 @@ class _RubrikViewState extends State<RubrikView> {
                                   anPageState = PageTopik(anTopik);
                                   anRouteTopik = Routes.BOLA;
                                   break;
-                                default:
-                                  anTopik = AppTopik.Berita;
+                                case 4:
+                                  anTopik = AppTopik.Lifestyle;
                                   anPageState = PageTopik(anTopik);
-                                  anRouteTopik = Routes.BERITA;
+                                  anRouteTopik = Routes.LIFESTYLE;
+                                  break;
+                                case 5:
+                                  anTopik = AppTopik.Foto;
+                                  anPageState = PageTopik(anTopik);
+                                  anRouteTopik = Routes.FOTO;
+                                  break;
+                                default:
+                                  reDirect = false;
                                   break;
                               }
-                              Get.offAllNamed(anRouteTopik);
+                              if(reDirect) {
+                                Get.offAllNamed(anRouteTopik);
+                              }
                             },
                             child: SelectCard(
                               choice: choices[index],

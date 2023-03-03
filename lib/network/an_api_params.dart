@@ -49,6 +49,7 @@ Map<String, String> NewsCategory = {
   'Foto': 'FOT',
   'Antara TV': 'VID',
   'Streaming': 'VID',
+  'Lifestyle': 'SBH',
 };
 
 Map<String, String> NewsSubCategory = {
@@ -73,6 +74,10 @@ Map<String, String> NewsSubCategory = {
   'Liga Inggris': 'LIG',
   'Liga Champions': 'LCH',
   'Bintang': 'BTG',
+  'Lifestyle': 'SBH',
+  'Foto': 'FOT',
+  'Hiburan': 'SBH',
+  'Foto Hardnews': 'FOT',
 };
 
 class ApiPars {
