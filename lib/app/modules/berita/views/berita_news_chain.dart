@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../routes/app_bottom_bar.dart';
+import '../../resource/color.dart';
 import '../views/berita_repository.dart';
 
 class NewsChain extends StatelessWidget {
@@ -156,37 +158,60 @@ class SingleNewsPage extends StatelessWidget {
     // final postData = Provider.of<DataHome>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        // redAntara Color.fromARGB(255, 172, 7, 7),
-        backgroundColor: const Color.fromARGB(255, 172, 7, 7),
         centerTitle: true,
-        foregroundColor: Colors.white,
-        title: SizedBox(
-          width: 200,
-          child: Image.asset('assets/images/antara_bg.png',)
-          )
-      ),
-      body: postData.repChainNewsHtml[idx].isNotEmpty ?
-      WebView(
-        initialUrl: 'about:blank',
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (controller) {
-          WebViewController _controller = controller;
-          _controller.loadUrl(
-            Uri.dataFromString(
-              postData.repChainNewsHtml[idx],
-              mimeType: 'text/html',
-              encoding: Encoding.getByName('utf-8')
-            ).toString()
-          );
-        },
-      )
-      : const Center(
-        child: Text(
-          'Berita tidak ditemukan',
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
+        foregroundColor: Colors.black,
+        // backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
+        backgroundColor: Colors.white,
+        title: Container(
+          height: 89.48,
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(top: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(width: 4,),
+              Image.asset(
+                'assets/images/text_antara_appbar.png',
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
         ),
       ),
+      body: Column(
+        children: [
+          Expanded(
+              child: postData.repChainNewsHtml[idx].isNotEmpty ?
+                WebView(
+                  initialUrl: 'about:blank',
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebViewCreated: (controller) {
+                    WebViewController _controller = controller;
+                    _controller.loadUrl(
+                      Uri.dataFromString(
+                        postData.repChainNewsHtml[idx],
+                        mimeType: 'text/html',
+                        encoding: Encoding.getByName('utf-8')
+                      ).toString()
+                    );
+                  },
+                )
+              : const Center(
+                  child: Text(
+                    'Berita tidak ditemukan',
+                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+              ),
+          ),
+          const BottomBar(),
+        ],
+      )
     );
   }
 }
