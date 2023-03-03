@@ -7,6 +7,12 @@ import './app_pages.dart';
 
 const int GetNewsLimit = 21;
 
+// Intialization in case common page applied
+AppTopik anTopik = AppTopik.Berita;
+PageTopik anPageState = PageTopik(anTopik);
+String anRouteTopik = Routes.HOME;
+
+
 enum AppTopik {
   Berita,
   Ekonomi,
@@ -21,6 +27,21 @@ enum AppTopik {
   Login,
   Profile
 }
+
+List<String> TopikCategory = const [
+  "Berita",
+  "Ekonomi",
+  "Sport",
+  "Bola",
+  "Lifestyle",
+  "Foto",
+  "Video",
+  "Infografik",
+  "English",
+  "More",
+  "Login",
+  "Profile"
+];
 
 List<List<String>> menuSubTopik = const [
     ["Berita", "Politik", "Hukum", "Metro", "Humaniora", /*"Nusantara",*/ "Dunia"],
@@ -227,7 +248,8 @@ const List<PopupMenuEntry<String>> popupMenu = [
     padding: EdgeInsets.only(
       left: 6,
     ),
-    value: Routes.HOME,
+    // value: Routes.HOME,
+    value: Routes.BERITA,
     child: ListTile(
       contentPadding: EdgeInsets.only(left: 0),
       leading: Icon(
@@ -428,7 +450,8 @@ const List<PopupMenuEntry<String>> popupMenuLoggedIn = [
     padding: EdgeInsets.only(
       left: 6,
     ),
-    value: Routes.HOME,
+    // value: Routes.HOME,
+    value: Routes.BERITA,
     child: ListTile(
       contentPadding: EdgeInsets.only(left: 0),
       leading: Icon(

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/berita/bindings/berita_binding.dart';
+import '../modules/berita/views/berita_view.dart';
 import '../modules/bisnis/bindings/bisnis_binding.dart';
 import '../modules/bisnis/views/bisnis_view.dart';
 import '../modules/bola/bindings/bola_binding.dart';
@@ -9,8 +11,7 @@ import '../modules/english/views/english_view.dart';
 import '../modules/foto/bindings/foto_binding.dart';
 import '../modules/foto/views/foto_view.dart';
 import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_antara.dart';
-import '../modules/home/views/home_view_first.dart';
+import '../modules/home/views/home_view.dart';
 import '../modules/infografik/bindings/infografik_binding.dart';
 import '../modules/infografik/views/infografik_view.dart';
 import '../modules/lifestyle/bindings/lifestyle_binding.dart';
@@ -39,23 +40,31 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => Home(),
-      binding: HomeBinding(),
+      // page: () => HomeView(),
+      // binding: HomeBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.BISNIS,
-      page: () => BisnisView(),
-      binding: BisnisBinding(),
+      // page: () => BisnisView(),
+      // binding: BisnisBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.SPORT,
-      page: () => SportView(),
-      binding: SportBinding(),
+      // page: () => SportView(),
+      // binding: SportBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.BOLA,
-      page: () => BolaView(),
-      binding: BolaBinding(),
+      // page: () => BolaView(),
+      // binding: BolaBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.LIFESTYLE,
@@ -101,6 +110,11 @@ class AppPages {
       name: _Paths.SIGNUP,
       page: () => SignupView(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.BERITA,
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
   ];
 }

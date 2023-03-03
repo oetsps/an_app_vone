@@ -5,16 +5,16 @@ import 'package:an_app_vone/app/modules/resource/color.dart';
 import 'package:an_app_vone/app/modules/resource/string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../routes/custom_bottomsheet.dart';
+import './custom_bottomsheet.dart';
 
-class Search extends StatefulWidget {
-  const Search({Key? key}) : super(key: key);
+class SearchPage extends StatefulWidget {
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
-  State<Search> createState() => _SearchState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     List<String> images = [
@@ -26,6 +26,7 @@ class _SearchState extends State<Search> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          foregroundColor: Colors.black,
           backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,

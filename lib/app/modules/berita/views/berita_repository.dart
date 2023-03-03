@@ -5,9 +5,8 @@ import '../../../../model/an_response.dart';
 import '../../../../network/an_get_services.dart';
 import '../../../../network/an_api_params.dart';
 
-class DataSport extends ChangeNotifier {
-  final AppTopik topik = AppTopik.Sport;
-  // String subTopik = 'Bisnis';
+class DataHome extends ChangeNotifier {
+  AppTopik topik = anTopik;
   String curSubTopik = '';
   int curSubTopikIdx = 0;
   bool loading = false;
@@ -24,19 +23,21 @@ class DataSport extends ChangeNotifier {
   late Readnews? postRequestNews;
   late String onRequestNews = '';
 
-  DataSport() {
-    for (var str in menuSubTopik[AppTopik.Sport.index]) {
+  DataHome() {
+    for (var str in menuSubTopik[topik.index]) {
       listSubTopik.add(str);
       repStatus.add(false);
       repNewsHtml.add('');
     }
 
-    for (var i=0 ; i < (GetNewsLimit - 1) ; i++) {
+    // for (var i=0 ; i < (GetNewsLimit - 1) ; i++) {
+    // Declare as below in case common page applied
+    for (var i=0 ; i < (GetNewsLimit) ; i++) {
       repChainNewsHtml.add('');
     }
 
     repGetNews = List.generate(
-      menuSubTopik[AppTopik.Sport.index].length,
+      menuSubTopik[topik.index].length,
       (index) => GetNews(
           '',
           null,
@@ -47,7 +48,7 @@ class DataSport extends ChangeNotifier {
     );
 
     repReadNews = List.generate(
-        menuSubTopik[AppTopik.Sport.index].length,
+        menuSubTopik[topik.index].length,
         (index) => Readnews(
             '',
             null,
@@ -64,12 +65,12 @@ class DataSport extends ChangeNotifier {
 
     if (!repStatus[curSubTopikIdx]) {
       String iUrl = requestAnApi.requestAnNews(
-          action: 'get_news',
-          category: 'Sport',
-          subcategory: curSubTopik,
-          top_news: 1
+        action: 'get_news',
+        category: TopikCategory[topik.index] == "Berita" ? curSubTopik : TopikCategory[topik.index],
+        subcategory: TopikCategory[topik.index] == "Berita" ? null : curSubTopik,
+        top_news: 1
       );
-      print('iUrl ====> $iUrl');
+
       if (iUrl == '') {
         print('Error get_news cause of invalid url');
         return null;
@@ -83,10 +84,10 @@ class DataSport extends ChangeNotifier {
 
       for (int i = 0; i < repGetNews[curSubTopikIdx]!.data.length; i++) {
         String url = requestAnApi.requestAnNews(
-            action: 'read_news',
-            category: 'Sport',
-            subcategory: curSubTopik,
-            news_id: repGetNews[curSubTopikIdx]!.data[i].id);
+          action: 'read_news',
+          category: curSubTopik,
+          news_id: repGetNews[curSubTopikIdx]!.data[i].id
+        );
         if (url == '') {
           print('Error read_news cause of invalid url');
           continue;
@@ -97,12 +98,12 @@ class DataSport extends ChangeNotifier {
             continue;
           }
         }
-        repGetNews[curSubTopikIdx]!.data.removeAt(i);
+        // Comment below statement in case common page applied
+        // repGetNews[curSubTopikIdx]!.data.removeAt(i);
         break;
       }
 
-      repNewsHtml[curSubTopikIdx] =
-          formReadNewsToHtml(repReadNews[curSubTopikIdx]!);
+      repNewsHtml[curSubTopikIdx] = formReadNewsToHtml(repReadNews[curSubTopikIdx]!);
 
       if (changeSubTopik) {
         for (int i = 0; i < repGetNews[curSubTopikIdx]!.data.length; i++) {
@@ -157,19 +158,25 @@ class DataSport extends ChangeNotifier {
     return repGetNews[curSubTopikIdx]!.data[idx].photo_small;
   }
 
+  String urlNewsListPhotoMedium(int idx) {
+    return repGetNews[curSubTopikIdx]!.data[idx].photo_medium;
+  }
+
+  String urlNewsListPhotoBig(int idx) {
+    return repGetNews[curSubTopikIdx]!.data[idx].photo_big;
+  }
+
   int getNewListLength() {
     return repGetNews[curSubTopikIdx]!.data.length;
   }
 
   void setSubTopik(String labelSubTopik, [bool refresh = false]) async {
     loading = true;
-    // changeSubTopik = true;
     if (curSubTopik != labelSubTopik) {
       changeSubTopik = true;
       curSubTopik = labelSubTopik;
     }
 
-    // curSubTopik = labelSubTopik;
     curSubTopikIdx = listSubTopik.indexWhere((val) => val == curSubTopik);
     if (refresh) {
       repStatus[curSubTopikIdx] = false;
@@ -203,5 +210,23 @@ class DataSport extends ChangeNotifier {
 
   String getHtmlOnRequestNews() {
     return onRequestNews;
+  }
+
+  String getReadNewsCategory() {
+    return repReadNews[curSubTopikIdx]!.data.category;
+  }
+  String getReadNewsTitle() {
+    return repReadNews[curSubTopikIdx]!.data.title;
+  }
+  String getReadNewsPhoto() {
+    return repReadNews[curSubTopikIdx]!.data.photo;
+  }
+  String getReadNewsContent() {
+    print(repReadNews[curSubTopikIdx]!.data.content);
+    return repReadNews[curSubTopikIdx]!.data.content;
+  }
+  String getReadNewsOriUrl() {
+    print(repReadNews[curSubTopikIdx]!.data.original_url);
+    return repReadNews[curSubTopikIdx]!.data.original_url;
   }
 }

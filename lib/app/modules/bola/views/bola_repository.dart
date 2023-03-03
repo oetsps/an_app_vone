@@ -43,7 +43,7 @@ class DataBola extends ChangeNotifier {
           List.generate(
               GetNewsLimit,
               (index) => DataGetNews(
-                  0, 0, '', null, '', '', null, null, 0.0, '', '', ''))),
+                  0, 0, '', null, '', '', null, null, 0.0, '', '', '', ''))),
     );
 
     repReadNews = List.generate(

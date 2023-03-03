@@ -3,7 +3,7 @@ import '../modules/resource/color.dart';
 import '../modules/resource/string.dart';
 import 'package:flutter/material.dart';
 
-import '../modules/rubrik/rubrik_antara.dart';
+import '../modules/home/views/rubrik_antara.dart';
 
 // custom bottom sheet
 class CustomBottomSheetWidget extends StatefulWidget {
@@ -224,7 +224,7 @@ class _TextButtonWOutline2State extends State<TextButtonWOutline2> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Rubrik(),
+              builder: (context) => const RubrikView(),
             ),
           );
         } else if (widget.determineAction == "PoppingOutBottomSheet") {

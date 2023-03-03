@@ -17,6 +17,7 @@ class _SavedNewsState extends State<SavedNews> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          foregroundColor: Colors.black,
           backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
