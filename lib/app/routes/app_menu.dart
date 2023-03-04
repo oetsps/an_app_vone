@@ -43,6 +43,16 @@ List<String> TopikCategory = const [
   "Profile"
 ];
 
+Map<String,Color> anTabBarColor = {
+  'Berita': Color.fromARGB(0xFF, 0xA3, 0x09, 0x30),
+  'Ekonomi': Color.fromARGB(0xFF, 0x52, 0x50, 0xD2),
+  'Sport': Color.fromARGB(0xFF, 0xED, 0x87, 0x69),
+  'Bola': Color.fromARGB(0xFF, 0x47, 0x6B, 0x7A),
+  'Lifestyle': Color.fromARGB(0xFF, 0x08, 0x8F, 0xFA),
+  'Foto': Color.fromARGB(0xFF, 0x7E, 0xA8, 0x29),
+};
+
+
 List<List<String>> menuSubTopik = const [
     ["Berita", "Politik", "Hukum", "Metro", "Humaniora", /*"Nusantara",*/ "Dunia"],
     [

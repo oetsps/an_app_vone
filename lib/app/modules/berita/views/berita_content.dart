@@ -107,7 +107,8 @@ class HomeNewsList extends StatelessWidget {
                                                       SizedBox(
                                                         width: 40,
                                                         child: Text(
-                                                          postData.getReadNewsCategory(),
+                                                          // postData.getReadNewsCategory(),
+                                                          postData.getNewsListCategory(0),
                                                           style: const TextStyle(
                                                             fontSize: 9,
                                                             color: Colors.red,

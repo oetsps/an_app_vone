@@ -27,15 +27,6 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
   late final TabController _tabController;
   final authC = Get.find<AuthController>();
 
-  List<Color> tabBarColor = const [
-    Color.fromARGB(0xFF, 0xA3, 0x09, 0x30),
-    Color.fromARGB(0xFF, 0x52, 0x50, 0xD2),
-    Color.fromARGB(0xFF, 0xED, 0x87, 0x69),
-    Color.fromARGB(0xFF, 0x47, 0x6B, 0x7A),
-    Color.fromARGB(0xFF, 0x08, 0x8F, 0xFA),
-    Color.fromARGB(0xFF, 0x7E, 0xA8, 0x29),
-  ];
-
   @override
   void initState() {
     topik = anTopik;
@@ -171,8 +162,7 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
                         // width: 58,
                         width: 58.8,
                         decoration: BoxDecoration (
-                          // color: Color.fromARGB(0xFF, 0xA3, 0x09, 0x30),
-                          color: tabBarColor[topik.index],
+                          color: anTabBarColor[TopikCategory[topik.index]],
                         ),
                         child: Column(
                           children: [
@@ -193,8 +183,7 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
                         // width: 301,
                         width: screenSize().width - (58.8 + 1),
                         height: 33,
-                        // color: const Color.fromARGB(0xFF, 0xA3, 0x09, 0x30),
-                        color: tabBarColor[topik.index],
+                        color: anTabBarColor[TopikCategory[topik.index]],
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: TabBar(

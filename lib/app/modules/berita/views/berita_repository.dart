@@ -161,6 +161,10 @@ class DataHome extends ChangeNotifier {
     return repGetNews[curSubTopikIdx]!.data[idx].title;
   }
 
+  String getNewsListCategory(int idx) {
+    return repGetNews[curSubTopikIdx]!.data[idx].category;
+  }
+
   String urlNewsListPhotoSmall(int idx) {
     return repGetNews[curSubTopikIdx]!.data[idx].photo_small;
   }
