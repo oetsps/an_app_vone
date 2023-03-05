@@ -5,6 +5,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../routes/app_bottom_bar.dart';
 import '../../../routes/app_menu.dart';
+import '../../login/views/login_antara.dart';
 import '../../resource/color.dart';
 import '../views/berita_repository.dart';
 
@@ -23,43 +24,45 @@ class NewsChain extends StatelessWidget {
       delegate: SliverChildListDelegate([
         const SizedBox(height: 8),
         for (int i = 9; i < (postData.loading ? 5 : postData.getNewListLength()); i++)
-          GestureDetector(
-            // onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-            //   builder: (BuildContext context) {
-            //     return SingleNewsPage(postData: postData,idx: i);
-            //   }
-            // ))),
-            onTap: () => {
-              postData.setSingleNewsView(i)
-            },
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 59,
-                  child: Row(
-                    children: [
-                      SizedBox(width: 16,),
-                      Container(
-                        width: 104,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: postData.loading ?
-                        Image.asset(
-                          'assets/images/antara.png',
-                          alignment: Alignment.center,
-                        )
-                        : Image.network(
+          Column(
+            children: [
+              SizedBox(
+                height: 59,
+                child: Row(
+                  children: [
+                    SizedBox(width: 16,),
+                    Container(
+                      width: 104,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: postData.loading ?
+                      Image.asset(
+                        'assets/images/antara.png',
+                        alignment: Alignment.center,
+                      )
+                      : GestureDetector(
+                        // onTap: () {},
+                        onTap: () => {
+                          postData.setSingleNewsView(i)
+                        },
+                        child: Image.network(
                           postData.urlNewsListPhotoSmall(i),
                           alignment:Alignment.center,
                           fit: BoxFit.fill,
                         ),
                       ),
-                      const SizedBox(width: 8,),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Container(
+                    ),
+                    const SizedBox(width: 8,),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            // onTap: () {},
+                            onTap: () => {
+                              postData.setSingleNewsView(i)
+                            },
+                            child: Container(
                               height: 45,
                               alignment: Alignment.topLeft,
                               child: Text(
@@ -71,23 +74,32 @@ class NewsChain extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 14,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 40,
-                                    child: Text(
-                                      postData.getReadNewsCategory(),
-                                      style: const TextStyle(
-                                        fontSize: 8,
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                          ),
+                          SizedBox(
+                            height: 14,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 50,
+                                  child: Text(
+                                    // postData.getReadNewsCategory(),
+                                    postData.getNewsListCategory(i),
+                                    style: const TextStyle(
+                                      fontSize: 8,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(width: 2),
-                                  SizedBox(
+                                ),
+                                const SizedBox(width: 4),
+                                GestureDetector(
+                                  // onTap: () {},
+                                  onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                        return const Login();
+                                      }
+                                  ))),
+                                  child: SizedBox(
                                     width: 14,
                                     child: Image.asset(
                                       'assets/icons/ic_heart.png',
@@ -95,51 +107,51 @@ class NewsChain extends StatelessWidget {
                                       color: Colors.black,
                                     ),
                                   ),
-                                  const SizedBox(width: 2),
-                                  SizedBox(
-                                    width: 14,
-                                    child: Image.asset(
-                                      'assets/icons/ic_chat.png',
-                                      fit: BoxFit.contain,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 2),
-                                  SizedBox(
-                                    width: 12,
-                                    child: Image.asset(
-                                      'assets/icons/ic_send.png',
-                                      fit: BoxFit.contain,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Expanded(child: Container(),),
-                                  const Icon(
-                                    Icons.access_time,
+                                ),
+                                const SizedBox(width: 4),
+                                SizedBox(
+                                  width: 14,
+                                  child: Image.asset(
+                                    'assets/icons/ic_chat.png',
+                                    fit: BoxFit.contain,
                                     color: Colors.black,
-                                    size: 14,
                                   ),
-                                  const SizedBox(width: 2),
-                                  const Text(
-                                    '17 Menit',
-                                    style: TextStyle(
-                                      fontSize: 9,
-                                      color: Colors.black,
-                                    ),
+                                ),
+                                const SizedBox(width: 4),
+                                SizedBox(
+                                  width: 12,
+                                  child: Image.asset(
+                                    'assets/icons/ic_send.png',
+                                    fit: BoxFit.contain,
+                                    color: Colors.black,
                                   ),
-                                ],
-                              ),
+                                ),
+                                Expanded(child: Container(),),
+                                const Icon(
+                                  Icons.access_time,
+                                  color: Colors.black,
+                                  size: 14,
+                                ),
+                                const SizedBox(width: 2),
+                                const Text(
+                                  '17 Menit',
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 16,),
-                    ],
-                  ),
+                    ),
+                    SizedBox(width: 16,),
+                  ],
                 ),
-                SizedBox(height: 8,)
-              ],
-            ),
+              ),
+              SizedBox(height: 8,)
+            ],
           ),
       ]),
     );

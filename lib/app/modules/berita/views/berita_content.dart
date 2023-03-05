@@ -5,6 +5,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../routes/app_menu.dart';
+import '../../login/views/login_antara.dart';
 import '../views/berita_repository.dart';
 import './berita_news_chain.dart';
 
@@ -121,12 +122,20 @@ class HomeNewsList extends StatelessWidget {
                                                             ),
                                                           ),
                                                           const SizedBox(width: 2),
-                                                          SizedBox(
-                                                            width: 14,
-                                                            child: Image.asset(
-                                                              'assets/icons/ic_heart.png',
-                                                              fit: BoxFit.contain,
-                                                              color: Colors.white,
+                                                          GestureDetector(
+                                                            // onTap: () {},
+                                                            onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                                builder: (BuildContext context) {
+                                                                  return const Login();
+                                                                }
+                                                            ))),
+                                                            child: SizedBox(
+                                                              width: 14,
+                                                              child: Image.asset(
+                                                                'assets/icons/ic_heart.png',
+                                                                fit: BoxFit.contain,
+                                                                color: Colors.white,
+                                                              ),
                                                             ),
                                                           ),
                                                           const SizedBox(width: 2),
@@ -261,7 +270,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(1),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -270,12 +280,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (BuildContext context) {
+                                                  return const Login();
+                                                }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
@@ -373,7 +391,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(2),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -382,12 +401,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (BuildContext context) {
+                                                    return const Login();
+                                                  }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
@@ -485,7 +512,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(3),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -494,12 +522,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (BuildContext context) {
+                                                    return const Login();
+                                                  }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
@@ -597,7 +633,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(4),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -606,12 +643,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (BuildContext context) {
+                                                    return const Login();
+                                                  }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
@@ -738,7 +783,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(5),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -747,12 +793,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (BuildContext context) {
+                                                    return const Login();
+                                                  }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
@@ -850,7 +904,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(6),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -859,12 +914,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (BuildContext context) {
+                                                    return const Login();
+                                                  }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
@@ -962,7 +1025,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(7),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -971,12 +1035,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (BuildContext context) {
+                                                    return const Login();
+                                                  }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
@@ -1074,7 +1146,8 @@ class HomeNewsList extends StatelessWidget {
                                             SizedBox(
                                               width: 40,
                                               child: Text(
-                                                postData.getReadNewsCategory(),
+                                                // postData.getReadNewsCategory(),
+                                                postData.getNewsListCategory(8),
                                                 style: const TextStyle(
                                                   fontSize: 8,
                                                   color: Colors.red,
@@ -1083,12 +1156,20 @@ class HomeNewsList extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_heart.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                            GestureDetector(
+                                              // onTap: () {},
+                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (BuildContext context) {
+                                                    return const Login();
+                                                  }
+                                              ))),
+                                              child: SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_heart.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 2),
