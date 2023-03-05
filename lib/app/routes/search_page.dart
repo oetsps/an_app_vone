@@ -44,153 +44,150 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 52,
-                      color: Colors.transparent,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: ColorClass.GREY_BUTTON,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(8),
-                            ),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "Pencarian Piala Dunia Hardcode",
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: ColorClass.BLACK_TEXT,
-                                fontWeight: FontWeight.bold,
+        body: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 52,
+                            color: Colors.transparent,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: ColorClass.GREY_BUTTON,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8),
+                                  ),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Pencarian Piala Dunia Hardcode",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: ColorClass.BLACK_TEXT,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  TextButtonWOutline2(
-                    icon: "assets/icons/icon_filter.png",
-                    text: StringClass.FILTER_TEXT,
-                    icon2: "assets/icons/icon_down_arrow.png",
-                    determineAction: "PoppingOutBottomSheet",
-                  ),
-                ],
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: Image.network(
-                          jsonEncode(Dummy.get_news[index]['photo_medium'])
-                              .replaceAll("\"", "")),
-                      title: Padding(
-                        padding: const EdgeInsets.only(bottom: 4),
-                        child: Text(
-                          jsonEncode(Dummy.get_news[index]['title'])
-                              .replaceAll("\"", ""),
+                        TextButtonWOutline2(
+                          icon: "assets/icons/icon_filter.png",
+                          text: StringClass.FILTER_TEXT,
+                          icon2: "assets/icons/icon_down_arrow.png",
+                          determineAction: "PoppingOutBottomSheet",
                         ),
-                      ),
-                      subtitle: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(right: 4),
-                                child: Text("Berita"),
+                      ],
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: Image.network(
+                                jsonEncode(Dummy.get_news[index]['photo_medium'])
+                                    .replaceAll("\"", "")),
+                            title: Padding(
+                              padding: const EdgeInsets.only(bottom: 4),
+                              child: Text(
+                                jsonEncode(Dummy.get_news[index]['title'])
+                                    .replaceAll("\"", ""),
                               ),
-                              GestureDetector(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 4),
-                                  child:
-                                      Image.asset('assets/icons/ic_heart.png'),
+                            ),
+                            subtitle: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 4),
+                                      child: Text("Berita"),
+                                    ),
+                                    GestureDetector(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 4),
+                                        child:
+                                            Image.asset('assets/icons/ic_heart.png'),
+                                      ),
+                                      onTap: () {},
+                                    ),
+                                    GestureDetector(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 4),
+                                        child:
+                                            Image.asset('assets/icons/ic_chat.png'),
+                                      ),
+                                      onTap: () {},
+                                    ),
+                                    GestureDetector(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 4),
+                                        child:
+                                            Image.asset('assets/icons/ic_send.png'),
+                                      ),
+                                      onTap: () {},
+                                    ),
+                                  ],
                                 ),
-                                onTap: () {},
-                              ),
-                              GestureDetector(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 4),
-                                  child:
-                                      Image.asset('assets/icons/ic_chat.png'),
-                                ),
-                                onTap: () {},
-                              ),
-                              GestureDetector(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 4),
-                                  child:
-                                      Image.asset('assets/icons/ic_send.png'),
-                                ),
-                                onTap: () {},
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 4),
-                                  child:
-                                      Image.asset('assets/icons/ic_time.png'),
-                                ),
-                                onTap: () {},
-                              ),
-                              Text("17 Menit")
-                            ],
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                  itemCount: Dummy.get_news.length,
-                ),
-              ),
-              GridView.builder(
-                itemCount: images.length,
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: Image.asset(
-                        images[index],
-                        fit: BoxFit.fill,
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    GestureDetector(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 4),
+                                        child:
+                                            Image.asset('assets/icons/ic_time.png'),
+                                      ),
+                                      onTap: () {},
+                                    ),
+                                    Text("17 Menit")
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                        itemCount: Dummy.get_news.length,
                       ),
                     ),
-                  );
-                },
+                    GridView.builder(
+                      itemCount: images.length,
+                      shrinkWrap: true,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(3),
+                            child: Image.asset(
+                              images[index],
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-              const BottomBar(),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => const Login()),
-              //     );
-              //   },
-              //   child: Text("Go To Login Page"),
-              // )
-            ],
-          ),
+            ),
+            const BottomBar(),
+          ],
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../routes/app_bottom_bar.dart';
+import '../../../routes/app_menu.dart';
 import '../../resource/color.dart';
 import '../views/berita_repository.dart';
 
@@ -23,12 +24,14 @@ class NewsChain extends StatelessWidget {
         const SizedBox(height: 8),
         for (int i = 9; i < (postData.loading ? 5 : postData.getNewListLength()); i++)
           GestureDetector(
-            onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) {
-                return SingleNewsPage(postData: postData,idx: i);
-              }
-            ))),
-            // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SingleNewsPage(idx: i))),
+            // onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+            //   builder: (BuildContext context) {
+            //     return SingleNewsPage(postData: postData,idx: i);
+            //   }
+            // ))),
+            onTap: () => {
+              postData.setSingleNewsView(i)
+            },
             child: Column(
               children: [
                 SizedBox(
@@ -155,7 +158,6 @@ class SingleNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final postData = Provider.of<DataHome>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -212,6 +214,49 @@ class SingleNewsPage extends StatelessWidget {
           const BottomBar(),
         ],
       )
+    );
+  }
+}
+
+class SingleNewsView extends StatelessWidget {
+  const SingleNewsView({
+    Key? key,
+    required this.postData,
+    // required this.idx,
+  }) : super(key: key);
+
+  final DataHome postData;
+  // final int idx;
+
+  @override
+  Widget build(BuildContext context) {
+    // final postData = Provider.of<DataHome>(context, listen: false);
+    postData.rstSingleNewsView();
+    return Container(
+      child: postData.repChainNewsHtml[postData.singleNewsIdx].isNotEmpty ?
+      // child: postData.repChainNewsHtml[idx].isNotEmpty ?
+      WebView(
+        initialUrl: 'about:blank',
+        javascriptMode: JavascriptMode.unrestricted,
+        onWebViewCreated: (controller) {
+          WebViewController _controller = controller;
+          _controller.loadUrl(
+              Uri.dataFromString(
+                  postData.repChainNewsHtml[postData.singleNewsIdx],
+                  // postData.repChainNewsHtml[idx],
+                  mimeType: 'text/html',
+                  encoding: Encoding.getByName('utf-8')
+              ).toString()
+          );
+        },
+      )
+      : const Center(
+          child: Text(
+            'Berita tidak ditemukan',
+            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+      ),
     );
   }
 }

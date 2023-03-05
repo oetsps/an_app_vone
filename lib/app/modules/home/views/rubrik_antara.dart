@@ -63,32 +63,26 @@ class _RubrikViewState extends State<RubrikView> {
                               switch(index) {
                                 case 0:
                                   anTopik = AppTopik.Berita;
-                                  anPageState = PageTopik(anTopik);
                                   anRouteTopik = Routes.BERITA;
                                   break;
                                 case 1:
                                   anTopik = AppTopik.Ekonomi;
-                                  anPageState = PageTopik(anTopik);
                                   anRouteTopik = Routes.BISNIS;
                                   break;
                                 case 2:
                                   anTopik = AppTopik.Sport;
-                                  anPageState = PageTopik(anTopik);
                                   anRouteTopik = Routes.SPORT;
                                   break;
                                 case 3:
                                   anTopik = AppTopik.Bola;
-                                  anPageState = PageTopik(anTopik);
                                   anRouteTopik = Routes.BOLA;
                                   break;
                                 case 4:
                                   anTopik = AppTopik.Lifestyle;
-                                  anPageState = PageTopik(anTopik);
                                   anRouteTopik = Routes.LIFESTYLE;
                                   break;
                                 case 5:
                                   anTopik = AppTopik.Foto;
-                                  anPageState = PageTopik(anTopik);
                                   anRouteTopik = Routes.FOTO;
                                   break;
                                 default:
@@ -96,6 +90,7 @@ class _RubrikViewState extends State<RubrikView> {
                                   break;
                               }
                               if(reDirect) {
+                                anPageState = PageTopik(anTopik);
                                 Get.offAllNamed(anRouteTopik);
                               }
                             },
