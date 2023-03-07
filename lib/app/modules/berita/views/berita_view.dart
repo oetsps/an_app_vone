@@ -23,6 +23,7 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
   late AppTopik topik;
   late PageTopik pageState;
   late String routeTopik;
+  late bool singleView;
 
   late final TabController _tabController;
   final authC = Get.find<AuthController>();
@@ -32,6 +33,7 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
     topik = anTopik;
     pageState = anPageState;
     routeTopik = anRouteTopik;
+    singleView = anSingleNewsView;
     _tabController = TabController(length: pageState.subTopik[topik.index].length, vsync: this);
     super.initState();
   }
@@ -46,6 +48,7 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
       pageState.subTopik[topik.index].length,
       (index) => pageState.subTopik[topik.index][index]
     );
+    // final postData = Provider.of<DataHome>(context);
     return ChangeNotifierProvider(
       create: ((context) => DataHome()),
       child: MaterialApp(
@@ -66,7 +69,11 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
                         SizedBox(
                           child: IconButton(
                             icon: const Icon(Icons.arrow_back),
-                            onPressed: () { },
+                            onPressed: () {
+                              setState(() {
+
+                              });
+                            },
                           ),
                         ),
                         Expanded(
@@ -106,49 +113,48 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
                               authC.getLoginStatus() ? popupMenuLoggedIn : popupMenu,
                             onSelected: (String newValue) {
                               if (newValue != routeTopik) {
+                                var _change = false;
                                 // Declare as below in case common page applied
                                 switch(newValue) {
                                   case Routes.HOME:
                                     anTopik = AppTopik.Berita;
-                                    anPageState = PageTopik(anTopik);
-                                    anRouteTopik = newValue;
+                                    _change = true;
                                     break;
                                   case Routes.BERITA:
                                     anTopik = AppTopik.Berita;
-                                    anPageState = PageTopik(anTopik);
-                                    anRouteTopik = newValue;
+                                    _change = true;
                                     break;
                                   case Routes.BISNIS:
                                     anTopik = AppTopik.Ekonomi;
-                                    anPageState = PageTopik(anTopik);
-                                    anRouteTopik = newValue;
+                                    _change = true;
                                     break;
                                   case Routes.SPORT:
                                     anTopik = AppTopik.Sport;
-                                    anPageState = PageTopik(anTopik);
-                                    anRouteTopik = newValue;
+                                    _change = true;
                                     break;
                                   case Routes.BOLA:
                                     anTopik = AppTopik.Bola;
-                                    anPageState = PageTopik(anTopik);
-                                    anRouteTopik = newValue;
+                                    _change = true;
                                     break;
                                   case Routes.LIFESTYLE:
                                     anTopik = AppTopik.Lifestyle;
-                                    anPageState = PageTopik(anTopik);
-                                    anRouteTopik = newValue;
+                                    _change = true;
                                     break;
                                   case Routes.FOTO:
                                     anTopik = AppTopik.Foto;
-                                    anPageState = PageTopik(anTopik);
-                                    anRouteTopik = newValue;
+                                    _change = true;
                                     break;
                                   default:
                                     break;
                                 }
-                                Get.offAllNamed(newValue);
+                                if(_change) {
+                                  anPageState = PageTopik(anTopik);
+                                  anSingleNewsView = false;
+                                  anRouteTopik = newValue;
+                                  Get.offAllNamed(newValue);
+                                }
                               }
-                            },
+                            }
                           ),
                         ),
                       ],

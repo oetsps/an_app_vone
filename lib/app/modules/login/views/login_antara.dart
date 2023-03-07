@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          foregroundColor: Colors.black,
           backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,

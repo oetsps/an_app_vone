@@ -135,7 +135,7 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 4),
                                   child:
-                                      Image.asset('assets/icons/ic_heart.png'),
+                                  Image.asset('assets/icons/ic_heart.png'),
                                 ),
                                 onTap: () {},
                               ),
@@ -143,7 +143,7 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 4),
                                   child:
-                                      Image.asset('assets/icons/ic_chat.png'),
+                                  Image.asset('assets/icons/ic_chat.png'),
                                 ),
                                 onTap: () {},
                               ),
@@ -151,7 +151,7 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 4),
                                   child:
-                                      Image.asset('assets/icons/ic_send.png'),
+                                  Image.asset('assets/icons/ic_send.png'),
                                 ),
                                 onTap: () {},
                               ),
@@ -165,7 +165,7 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 4),
                                   child:
-                                      Image.asset('assets/icons/ic_time.png'),
+                                  Image.asset('assets/icons/ic_time.png'),
                                 ),
                                 onTap: () {},
                               ),
@@ -205,8 +205,8 @@ class MyFloatingActionButton extends StatelessWidget {
         showBottomSheet(
             context: context,
             builder: (context) => Container(
-                  color: Colors.red,
-                ));
+              color: Colors.red,
+            ));
       },
     );
   }

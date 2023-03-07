@@ -12,6 +12,8 @@ class DataHome extends ChangeNotifier {
   bool loading = false;
   bool changeSubTopik = false;
   int reqNewsId = 0;
+  bool singleNewsView = false;
+  int singleNewsIdx = 0;
   RequestAnApi requestAnApi = RequestAnApi();
 
   late List<String> listSubTopik = [];
@@ -233,11 +235,26 @@ class DataHome extends ChangeNotifier {
     return repReadNews[curSubTopikIdx]!.data.photo;
   }
   String getReadNewsContent() {
-    print(repReadNews[curSubTopikIdx]!.data.content);
+    // print(repReadNews[curSubTopikIdx]!.data.content);
     return repReadNews[curSubTopikIdx]!.data.content;
   }
   String getReadNewsOriUrl() {
-    print(repReadNews[curSubTopikIdx]!.data.original_url);
+    // print(repReadNews[curSubTopikIdx]!.data.original_url);
     return repReadNews[curSubTopikIdx]!.data.original_url;
+  }
+
+  bool getSingleNewsView() {
+    return singleNewsView;
+  }
+
+  void rstSingleNewsView() {
+    singleNewsView = false;
+    // notifyListeners();
+  }
+
+  void setSingleNewsView(int idx) {
+    singleNewsView = true;
+    singleNewsIdx = idx;
+    notifyListeners();
   }
 }

@@ -3,6 +3,7 @@ import 'package:an_app_vone/app/routes/search_page.dart';
 import 'package:flutter/material.dart';
 
 import '../modules/home/views/rubrik_antara.dart';
+import '../modules/login/views/login_antara.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -198,7 +199,12 @@ class BottomBar extends StatelessWidget {
                     const SizedBox(width: 9,),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {},
+                        // onTap: () {},
+                        onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return const Login();
+                            }
+                        ))),
                         child: Column(
                             children: [
                               const SizedBox(height: 6,),
@@ -227,7 +233,12 @@ class BottomBar extends StatelessWidget {
                 height: 57,
                 padding: const EdgeInsets.only(top: 4, bottom: 4),
                 child: GestureDetector(
-                  onTap: () {},
+                  // onTap: () {},
+                  onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return const Login();
+                      }
+                  ))),
                   child: Column(
                       children: [
                         const SizedBox(height: 2,),

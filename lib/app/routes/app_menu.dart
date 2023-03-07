@@ -11,7 +11,7 @@ const int GetNewsLimit = 21;
 AppTopik anTopik = AppTopik.Berita;
 PageTopik anPageState = PageTopik(anTopik);
 String anRouteTopik = Routes.HOME;
-
+bool anSingleNewsView = false;
 
 enum AppTopik {
   Berita,
