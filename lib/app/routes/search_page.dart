@@ -196,18 +196,3 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
-
-class MyFloatingActionButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        showBottomSheet(
-            context: context,
-            builder: (context) => Container(
-              color: Colors.red,
-            ));
-      },
-    );
-  }
-}

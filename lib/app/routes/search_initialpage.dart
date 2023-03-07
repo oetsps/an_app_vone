@@ -7,6 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../data/mockdata/dummy.dart';
 import '../modules/berita/views/berita_news_chain.dart';
 import '../modules/resource/color.dart';
+import 'app_bottom_bar.dart';
 
 class SearchInitialPage extends StatefulWidget {
   const SearchInitialPage({Key? key}) : super(key: key);
@@ -282,7 +283,8 @@ class _SearchInitialPageState extends State<SearchInitialPage> {
                   );
                 }),
               ),
-            )
+            ),
+            const BottomBar(),
           ],
         ),
       ),
