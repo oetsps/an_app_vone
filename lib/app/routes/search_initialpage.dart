@@ -34,6 +34,14 @@ class _SearchInitialPageState extends State<SearchInitialPage> {
     "Jadwal Liga 1",
     "Kebakaran data center"
   ];
+  final TextEditingController searchText = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    searchText.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +78,7 @@ class _SearchInitialPageState extends State<SearchInitialPage> {
                 ),
               ),
               child: TextField(
+                controller: searchText,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
                   hintText: "Ketik keyword berita yang mau kamu cari...",
@@ -78,13 +87,15 @@ class _SearchInitialPageState extends State<SearchInitialPage> {
                   filled: true,
                   fillColor: Colors.white,
                   suffixIcon: IconButton(
-                    // padding: const EdgeInsets.all(16),
                     icon: Image.asset("assets/images/icon_vector.png"),
                     onPressed: () => {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SearchPage()),
+                          builder: (context) => SearchPage(
+                            searchText: searchText.text,
+                          ),
+                        ),
                       )
                     },
                   ),

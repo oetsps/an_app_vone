@@ -8,7 +8,8 @@ import './custom_bottomsheet.dart';
 import 'app_bottom_bar.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  final String searchText;
+  SearchPage({Key? key, required this.searchText}) : super(key: key);
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -62,10 +63,10 @@ class _SearchPageState extends State<SearchPage> {
                               Radius.circular(8),
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              "Pencarian Piala Dunia Hardcode",
-                              style: TextStyle(
+                              widget.searchText,
+                              style: const TextStyle(
                                 fontSize: 11,
                                 color: ColorClass.BLACK_TEXT,
                                 fontWeight: FontWeight.bold,
