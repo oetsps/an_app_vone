@@ -67,4 +67,7 @@ class StringClass {
   static String KALIMANTANTENGAH_TEXT = "Kalimantan Tengah";
   static String KALIMANTANTIMUR_TEXT = "Kalimantan Timur";
   static String TAMPILKAN_HASIL_TEXT = "Tampilkan Hasil";
+  static String PALING_BANYAK_DICARI = "Paling banyak dicari";
+  static String RIWAYAT_PENCARIAN = "Riwayat pencarian";
+  static String LIHAT_BERITA_POPULER = "Lihat Berita Populer";
 }

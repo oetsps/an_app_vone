@@ -1,5 +1,6 @@
 import 'package:an_app_vone/app/modules/login/views/login_antara.dart';
 import 'package:an_app_vone/app/modules/profile/views/profile_antara.dart';
+import 'package:an_app_vone/app/routes/search_initialpage.dart';
 import 'package:an_app_vone/app/routes/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -91,7 +92,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const SearchPage(),
+                                      builder: (context) => const SearchInitialPage(),
                                     ),
                                   );
                                 },

@@ -1,3 +1,4 @@
+import 'package:an_app_vone/app/routes/search_initialpage.dart';
 import 'package:an_app_vone/app/routes/search_page.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +75,7 @@ class BottomBar extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SearchPage(),
+                              builder: (context) => const SearchInitialPage(),
                             ),
                           );
                         },

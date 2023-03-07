@@ -4,7 +4,6 @@ import 'package:an_app_vone/app/data/mockdata/dummy.dart';
 import 'package:an_app_vone/app/modules/resource/color.dart';
 import 'package:an_app_vone/app/modules/resource/string.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import './custom_bottomsheet.dart';
 import 'app_bottom_bar.dart';
 
@@ -85,6 +84,26 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ],
               ),
+              GridView.builder(
+                itemCount: images.length,
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(3),
+                      child: Image.asset(
+                        images[index],
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  );
+                },
+              ),
               Expanded(
                 child: ListView.builder(
                   itemBuilder: (context, index) {
@@ -158,26 +177,6 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   itemCount: Dummy.get_news.length,
                 ),
-              ),
-              GridView.builder(
-                itemCount: images.length,
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(3),
-                      child: Image.asset(
-                        images[index],
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  );
-                },
               ),
               const BottomBar(),
               // ElevatedButton(
