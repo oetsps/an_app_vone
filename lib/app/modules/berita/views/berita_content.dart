@@ -43,6 +43,8 @@ class HomeNewsList extends StatelessWidget {
                         builder: (context) {return SingleNewsView(postData: postData);})
                         : CustomScrollView(
                       slivers: [
+                        const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
+
                         SliverToBoxAdapter(
                           child: Container(
                             height: 192,

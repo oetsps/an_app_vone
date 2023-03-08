@@ -12,7 +12,7 @@ import '../modules/infografik/views/infografik_view.dart';
 import '../modules/lifestyle/bindings/lifestyle_binding.dart';
 import '../modules/lifestyle/views/lifestyle_view.dart';
 import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
+import '../modules/login/views/login_antara.dart';
 import '../modules/more/bindings/more_binding.dart';
 import '../modules/more/views/more_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -95,7 +95,8 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      // page: () => LoginView(),
+      page: () => Login(),
       binding: LoginBinding(),
     ),
     GetPage(

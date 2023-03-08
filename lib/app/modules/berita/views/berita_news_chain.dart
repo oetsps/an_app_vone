@@ -161,78 +161,6 @@ class NewsChain extends StatelessWidget {
   }
 }
 
-class SingleNewsPage extends StatelessWidget {
-  const SingleNewsPage({
-    Key? key,
-    required this.postData,
-    required this.idx,
-  }) : super(key: key);
-
-  final DataHome postData;
-  final int idx;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          foregroundColor: Colors.black,
-          // backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
-          backgroundColor: Colors.white,
-          title: Container(
-            height: 89.48,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(top: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                  fit: BoxFit.cover,
-                ),
-                const SizedBox(width: 4,),
-                Image.asset(
-                  'assets/images/text_antara_appbar.png',
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
-          ),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: postData.repChainNewsHtml[idx].isNotEmpty ?
-              WebView(
-                initialUrl: 'about:blank',
-                javascriptMode: JavascriptMode.unrestricted,
-                onWebViewCreated: (controller) {
-                  WebViewController _controller = controller;
-                  _controller.loadUrl(
-                      Uri.dataFromString(
-                          postData.repChainNewsHtml[idx],
-                          mimeType: 'text/html',
-                          encoding: Encoding.getByName('utf-8')
-                      ).toString()
-                  );
-                },
-              )
-                  : const Center(
-                child: Text(
-                  'Berita tidak ditemukan',
-                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            const BottomBar(),
-          ],
-        )
-    );
-  }
-}
-
 class SingleNewsView extends StatelessWidget {
   const SingleNewsView({
     Key? key,
@@ -258,7 +186,8 @@ class SingleNewsView extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                 child: Image.network(
                   // postData.urlNewsListPhotoSmall(0),
-                  postData.urlNewsListPhotoMedium(0),
+                  // postData.urlNewsListPhotoMedium(0),
+                  postData.getSinglePhotoMedium(),
                   // postData.getReadNewsPhoto(),
                   fit: BoxFit.cover,
                 ),
@@ -273,33 +202,6 @@ class SingleNewsView extends StatelessWidget {
             )
         )],
     )
-    // CustomScrollView(
-    //   slivers: [
-    //   SliverList(
-    //     delegate: SliverChildListDelegate([
-    //     // Html(data: postData.getSingleNewsHtml()),
-    //   Container(
-    //     height: 1000,
-    //     child: WebView(
-    //       initialUrl: 'about:blank',
-    //       javascriptMode: JavascriptMode.unrestricted,
-    //       onWebViewCreated: (controller) async {
-    //         WebViewController _controller = controller;
-    //         _controller.loadUrl(
-    //             Uri.dataFromString(
-    //               await postData.getUrlContentSingleNews(),
-    //                 // postData.repChainNewsHtml[postData.singleNewsIdx],
-    //                 // postData.repChainNewsHtml[idx],
-    //                 mimeType: 'text/html',
-    //                 encoding: Encoding.getByName('utf-8')
-    //             ).toString()
-    //         );
-    //       },
-    //       ),
-    //   )]
-    //   ),
-    //   ),]
-    // )
         : const Center(
       child: Text(
         'Maaf sedang ada perbaikan.',

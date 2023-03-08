@@ -26,18 +26,18 @@ class LifestyleView extends GetView<LifestyleController> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                leading: PopupMenuButton(
-                  color: const Color.fromARGB(255, 241, 220, 218),
-                  icon: const Icon(Icons.list),
-                  itemBuilder: (context) =>
-                      authC.getLoginStatus() ? popupMenuLoggedIn : popupMenu,
-                  onSelected: (String newValue) {
-                    if (newValue != routeTopik) {
-                      // Navigator.of(context).pushNamed(newValue);
-                      Get.offAllNamed(newValue);
-                    }
-                  },
-                ),
+                // leading: PopupMenuButton(
+                //   color: const Color.fromARGB(255, 241, 220, 218),
+                //   icon: const Icon(Icons.list),
+                //   itemBuilder: (context) =>
+                //       authC.getLoginStatus() ? popupMenuLoggedIn : popupMenu,
+                //   onSelected: (String newValue) {
+                //     if (newValue != routeTopik) {
+                //       // Navigator.of(context).pushNamed(newValue);
+                //       Get.offAllNamed(newValue);
+                //     }
+                //   },
+                // ),
                 expandedHeight: 200.0,
                 floating: true,
                 pinned: true,
