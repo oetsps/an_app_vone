@@ -25,10 +25,10 @@ class HomeNewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(
-        controller: _tabController,
-        children: [
-          // for (String str in tabList)
-          ...tabList.map((label) => Builder(
+      controller: _tabController,
+      children: [
+        // for (String str in tabList)
+        ...tabList.map((label) => Builder(
             builder: (context) {
               final postData = Provider.of<DataHome>(context);
               postData.setSubTopik(label);
@@ -37,30 +37,31 @@ class HomeNewsList extends StatelessWidget {
               }
               // postData.getReadNewsData();
               return Builder(
-                builder: (context) {
-                  return postData.getSingleNewsView() ?
-                      SingleNewsView(postData: postData)
-                    : CustomScrollView(
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Container(
-                          height: 192,
-                          width: screenSize().width,
-                          // height: screenSize().width / 1.52,
-                          padding: const EdgeInsets.only(left: 16, right: 16,),
-                          child: GridView.builder(
-                            padding: const EdgeInsets.all(0.0),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                childAspectRatio: (screenSize().width - 16*2) / 192,
-                                // childAspectRatio: 1.52,
-                            ),
-                            scrollDirection: Axis.vertical,
-                            itemCount: 1,
-                            itemBuilder: (context, index) {
-                              late WebViewController _controller;
-                              postData.setSubTopik(label);
-                                return postData.loading ?
+                  builder: (context) {
+                    return postData.getSingleNewsView() ?
+                    Builder(
+                        builder: (context) {return SingleNewsView(postData: postData);})
+                        : CustomScrollView(
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Container(
+                            height: 192,
+                            width: screenSize().width,
+                            // height: screenSize().width / 1.52,
+                            padding: const EdgeInsets.only(left: 16, right: 16,),
+                            child: GridView.builder(
+                                padding: const EdgeInsets.all(0.0),
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  childAspectRatio: (screenSize().width - 16*2) / 192,
+                                  // childAspectRatio: 1.52,
+                                ),
+                                scrollDirection: Axis.vertical,
+                                itemCount: 1,
+                                itemBuilder: (context, index) {
+                                  late WebViewController _controller;
+                                  postData.setSubTopik(label);
+                                  return postData.loading ?
                                   SizedBox(
                                     height: screenSize().width / 1.52,
                                     child: SpinKitThreeBounce(
@@ -75,7 +76,7 @@ class HomeNewsList extends StatelessWidget {
                                       },
                                     ),
                                   )
-                                  : GridTile(
+                                      : GridTile(
                                     footer: Column(
                                       children: [
                                         // Container(
@@ -114,9 +115,10 @@ class HomeNewsList extends StatelessWidget {
                                                             child: Text(
                                                               // postData.getReadNewsCategory(),
                                                               postData.getNewsListCategory(0),
-                                                              style: const TextStyle(
+                                                              style: TextStyle(
                                                                 fontSize: 9,
-                                                                color: Colors.red,
+                                                                // color: Colors.red,
+                                                                color: anTabBarColor[TopikCategory[postData.topik.index]],
                                                                 fontWeight: FontWeight.bold,
                                                               ),
                                                             ),
@@ -157,7 +159,7 @@ class HomeNewsList extends StatelessWidget {
                                                             ),
                                                           ),
                                                           Expanded(
-                                                              child: Container(),
+                                                            child: Container(),
                                                           ),
                                                           const Icon(
                                                             Icons.access_time,
@@ -202,1050 +204,1058 @@ class HomeNewsList extends StatelessWidget {
                                       ),
                                     ),
                                   );
-                            }
+                                }
+                            ),
                           ),
                         ),
-                      ),
 
-                      const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
+                        const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
 
-                      SliverGrid.count(
-                        crossAxisCount: 2,
-                        // mainAxisSpacing: 8.0,
-                        crossAxisSpacing: 8.0,
-                        childAspectRatio: 160 / 140,
-                        // childAspectRatio: ((screenSize().width - 8) / 2) / 140,
-                        children: [
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                              : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(left: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(1)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(1),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
+                        SliverGrid.count(
+                          crossAxisCount: 2,
+                          // mainAxisSpacing: 8.0,
+                          crossAxisSpacing: 8.0,
+                          childAspectRatio: 160 / 140,
+                          // childAspectRatio: ((screenSize().width - 8) / 2) / 140,
+                          children: [
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
                                     ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(1)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(1),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
                                   ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(1),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(1),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(1),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
                                               ),
                                             ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (BuildContext context) {
-                                                  return const Login();
-                                                }
-                                              ))),
-                                              child: SizedBox(
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(1),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
                                                 width: 14,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_chat.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                          : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(right: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(2)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(2),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(2),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(2),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (BuildContext context) {
-                                                    return const Login();
-                                                  }
-                                              ))),
-                                              child: SizedBox(
-                                                width: 14,
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_send.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
                                                 color: Colors.black,
+                                                size: 14,
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                          : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(left: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(3)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(3),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(3),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(3),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
                                                 ),
                                               ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(right: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(2)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(2),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(2),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
                                             ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (BuildContext context) {
-                                                    return const Login();
-                                                  }
-                                              ))),
-                                              child: SizedBox(
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(2),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
                                                 width: 14,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_chat.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                          : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(right: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(4)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(4),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(4),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(4),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (BuildContext context) {
-                                                    return const Login();
-                                                  }
-                                              ))),
-                                              child: SizedBox(
-                                                width: 14,
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_send.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
                                                 color: Colors.black,
+                                                size: 14,
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
+                                                ),
                                               ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(3)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(3),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(3),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(3),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_chat.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_send.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
+                                                color: Colors.black,
+                                                size: 14,
+                                              ),
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(right: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(4)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(4),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(4),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(4),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_chat.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_send.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
+                                                color: Colors.black,
+                                                size: 14,
+                                              ),
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 
-                      const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
+                        const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
 
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          const SizedBox(height: 8,),
-                          SizedBox(
-                            height: 20,
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 16,),
-                                const Text("Populer di ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                              ],
+                        SliverList(
+                          delegate: SliverChildListDelegate([
+                            const SizedBox(height: 8,),
+                            SizedBox(
+                              height: 20,
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 16,),
+                                  const Text("Populer di ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                  Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 8,),
-                        ]),
-                      ),
+                            const SizedBox(height: 8,),
+                          ]),
+                        ),
 
-                      SliverGrid.count(
-                        crossAxisCount: 2,
-                        // mainAxisSpacing: 8.0,
-                        crossAxisSpacing: 8.0,
-                        childAspectRatio: 160 / 140,
-                        // childAspectRatio: ((screenSize().width - 8) / 2) / 140,
-                        children: [
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                              : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(left: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(5)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(5),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
+                        SliverGrid.count(
+                          crossAxisCount: 2,
+                          // mainAxisSpacing: 8.0,
+                          crossAxisSpacing: 8.0,
+                          childAspectRatio: 160 / 140,
+                          // childAspectRatio: ((screenSize().width - 8) / 2) / 140,
+                          children: [
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
                                     ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(5)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(5),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
                                   ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(5),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(5),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(5),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
                                               ),
                                             ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (BuildContext context) {
-                                                    return const Login();
-                                                  }
-                                              ))),
-                                              child: SizedBox(
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(5),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
                                                 width: 14,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_chat.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                              : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(right: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(6)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(6),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(6),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(6),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (BuildContext context) {
-                                                    return const Login();
-                                                  }
-                                              ))),
-                                              child: SizedBox(
-                                                width: 14,
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_send.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
                                                 color: Colors.black,
+                                                size: 14,
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                              : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(left: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(7)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(7),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(7),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(7),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
                                                 ),
                                               ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(right: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(6)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(6),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(6),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
                                             ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (BuildContext context) {
-                                                    return const Login();
-                                                  }
-                                              ))),
-                                              child: SizedBox(
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(6),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
                                                 width: 14,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_chat.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          postData.loading ?
-                          SizedBox(
-                            child: SpinKitThreeBounce(
-                              duration: const Duration(seconds: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                return DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: index.isEven ? Colors.grey[600] : Colors.grey[200],
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                              : Container(
-                            height: 140,
-                            padding: const EdgeInsets.only(right: 16),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => {postData.setSingleNewsView(8)},
-                                    child: Image.network(
-                                      postData.urlNewsListPhotoSmall(8),
-                                      // postData.getReadNewsPhoto(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  // color: Colors.grey[300],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
-                                    // color: Colors.grey[400],
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 28,
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            postData.getNewsListTitle(8),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4,),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 40,
-                                              child: Text(
-                                                // postData.getReadNewsCategory(),
-                                                postData.getNewsListCategory(8),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            GestureDetector(
-                                              // onTap: () {},
-                                              onTap: (() => Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (BuildContext context) {
-                                                    return const Login();
-                                                  }
-                                              ))),
-                                              child: SizedBox(
-                                                width: 14,
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
                                                 child: Image.asset(
-                                                  'assets/icons/ic_heart.png',
+                                                  'assets/icons/ic_send.png',
                                                   fit: BoxFit.contain,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 14,
-                                              child: Image.asset(
-                                                'assets/icons/ic_chat.png',
-                                                fit: BoxFit.contain,
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
                                                 color: Colors.black,
+                                                size: 14,
                                               ),
-                                            ),
-                                            const SizedBox(width: 2),
-                                            SizedBox(
-                                              width: 12,
-                                              child: Image.asset(
-                                                'assets/icons/ic_send.png',
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
+                                                ),
                                               ),
-                                            ),
-                                            Expanded(child: Container(),),
-                                            const Icon(
-                                              Icons.access_time,
-                                              color: Colors.black,
-                                              size: 14,
-                                            ),
-                                            const SizedBox(width: 2),
-                                            const Text(
-                                              '17 Menit',
-                                              style: TextStyle(
-                                                fontSize: 9,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-
-                      const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
-
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          const SizedBox(height: 8,),
-                          SizedBox(
-                            height: 20,
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 16,),
-                                const Text("Lini Masa ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                              ],
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(7)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(7),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(7),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(7),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_chat.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_send.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
+                                                color: Colors.black,
+                                                size: 14,
+                                              ),
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 8,),
-                        ]),
-                      ),
+                            postData.loading ?
+                            SizedBox(
+                              child: SpinKitThreeBounce(
+                                duration: const Duration(seconds: 1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: index.isEven ? Colors.grey[600] : Colors.grey[200],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                                : Container(
+                              height: 140,
+                              padding: const EdgeInsets.only(right: 16),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(8)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoSmall(8),
+                                        // postData.getReadNewsPhoto(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    // color: Colors.grey[300],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
+                                      // color: Colors.grey[400],
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 28,
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              postData.getNewsListTitle(8),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4,),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40,
+                                                child: Text(
+                                                  // postData.getReadNewsCategory(),
+                                                  postData.getNewsListCategory(8),
+                                                  style: TextStyle(
+                                                    fontSize: 8,
+                                                    // color: Colors.red,
+                                                    color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              GestureDetector(
+                                                // onTap: () {},
+                                                onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                    builder: (BuildContext context) {
+                                                      return const Login();
+                                                    }
+                                                ))),
+                                                child: SizedBox(
+                                                  width: 14,
+                                                  child: Image.asset(
+                                                    'assets/icons/ic_heart.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 14,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_chat.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              SizedBox(
+                                                width: 12,
+                                                child: Image.asset(
+                                                  'assets/icons/ic_send.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Expanded(child: Container(),),
+                                              const Icon(
+                                                Icons.access_time,
+                                                color: Colors.black,
+                                                size: 14,
+                                              ),
+                                              const SizedBox(width: 2),
+                                              const Text(
+                                                '17 Menit',
+                                                style: TextStyle(
+                                                  fontSize: 9,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 
-                      Builder(
-                        builder: (context) {
-                          return NewsChain(label: label);
-                        }
-                      ),
-                    ],
-                  );
-                }
+                        const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
+
+                        SliverList(
+                          delegate: SliverChildListDelegate([
+                            const SizedBox(height: 8,),
+                            SizedBox(
+                              height: 20,
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 16,),
+                                  const Text("Lini Masa ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                  Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 8,),
+                          ]),
+                        ),
+
+                        Builder(
+                            builder: (context) {
+                              return NewsChain(label: label);
+                            }
+                        ),
+                      ],
+                    );
+                  }
               );
             }
-          )
+        )
         ),
       ],
     );
@@ -1284,10 +1294,10 @@ class TopNewsPage extends StatelessWidget {
           WebViewController _controller = controller;
           _controller.loadUrl(
               Uri.dataFromString(
-                url,
-                // postData.repChainNewsHtml[idx],
-                mimeType: 'text/html',
-                encoding: Encoding.getByName('utf-8')
+                  url,
+                  // postData.repChainNewsHtml[idx],
+                  mimeType: 'text/html',
+                  encoding: Encoding.getByName('utf-8')
               ).toString()
           );
         },
@@ -1295,4 +1305,3 @@ class TopNewsPage extends StatelessWidget {
     );
   }
 }
-

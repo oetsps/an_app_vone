@@ -1,4 +1,3 @@
-import 'package:an_app_vone/app/modules/profile/views/profile_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../profile/views/profile_antara.dart';

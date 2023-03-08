@@ -1,8 +1,10 @@
 import 'dart:convert';
+// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
+import 'package:flutter_html/flutter_html.dart';
+import '../../../data/mockdata/singlenews_dummy.dart';
 import '../../../routes/app_bottom_bar.dart';
 import '../../../routes/app_menu.dart';
 import '../../login/views/login_antara.dart';
@@ -41,7 +43,7 @@ class NewsChain extends StatelessWidget {
                         'assets/images/antara.png',
                         alignment: Alignment.center,
                       )
-                      : GestureDetector(
+                          : GestureDetector(
                         // onTap: () {},
                         onTap: () => {
                           postData.setSingleNewsView(i)
@@ -84,9 +86,10 @@ class NewsChain extends StatelessWidget {
                                   child: Text(
                                     // postData.getReadNewsCategory(),
                                     postData.getNewsListCategory(i),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 8,
-                                      color: Colors.red,
+                                      // color: Colors.red,
+                                      color: anTabBarColor[TopikCategory[postData.topik.index]],
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -171,61 +174,61 @@ class SingleNewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        foregroundColor: Colors.black,
-        // backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
-        backgroundColor: Colors.white,
-        title: Container(
-          height: 89.48,
-          alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                'assets/images/logo.png',
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(width: 4,),
-              Image.asset(
-                'assets/images/text_antara_appbar.png',
-                fit: BoxFit.cover,
-              ),
-            ],
+        appBar: AppBar(
+          centerTitle: true,
+          foregroundColor: Colors.black,
+          // backgroundColor: ColorClass.BROKEN_WHITE_APPBAR,
+          backgroundColor: Colors.white,
+          title: Container(
+            height: 89.48,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(width: 4,),
+                Image.asset(
+                  'assets/images/text_antara_appbar.png',
+                  fit: BoxFit.cover,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
+        body: Column(
+          children: [
+            Expanded(
               child: postData.repChainNewsHtml[idx].isNotEmpty ?
-                WebView(
-                  initialUrl: 'about:blank',
-                  javascriptMode: JavascriptMode.unrestricted,
-                  onWebViewCreated: (controller) {
-                    WebViewController _controller = controller;
-                    _controller.loadUrl(
+              WebView(
+                initialUrl: 'about:blank',
+                javascriptMode: JavascriptMode.unrestricted,
+                onWebViewCreated: (controller) {
+                  WebViewController _controller = controller;
+                  _controller.loadUrl(
                       Uri.dataFromString(
-                        postData.repChainNewsHtml[idx],
-                        mimeType: 'text/html',
-                        encoding: Encoding.getByName('utf-8')
+                          postData.repChainNewsHtml[idx],
+                          mimeType: 'text/html',
+                          encoding: Encoding.getByName('utf-8')
                       ).toString()
-                    );
-                  },
-                )
-              : const Center(
-                  child: Text(
-                    'Berita tidak ditemukan',
-                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
+                  );
+                },
+              )
+                  : const Center(
+                child: Text(
+                  'Berita tidak ditemukan',
+                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
               ),
-          ),
-          const BottomBar(),
-        ],
-      )
+            ),
+            const BottomBar(),
+          ],
+        )
     );
   }
 }
@@ -242,32 +245,66 @@ class SingleNewsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final postData = Provider.of<DataHome>(context, listen: false);
     postData.rstSingleNewsView();
-    return Container(
-      child: postData.repChainNewsHtml[postData.singleNewsIdx].isNotEmpty ?
-      // child: postData.repChainNewsHtml[idx].isNotEmpty ?
-      WebView(
-        initialUrl: 'about:blank',
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (controller) {
-          WebViewController _controller = controller;
-          _controller.loadUrl(
-              Uri.dataFromString(
-                  postData.repChainNewsHtml[postData.singleNewsIdx],
-                  // postData.repChainNewsHtml[idx],
-                  mimeType: 'text/html',
-                  encoding: Encoding.getByName('utf-8')
-              ).toString()
-          );
-        },
-      )
-      : const Center(
-          child: Text(
-            'Berita tidak ditemukan',
-            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
+    // return postData.repChainNewsHtml[postData.singleNewsIdx].isNotEmpty ?
+
+    // USE DUMMY
+    return postData.getSingleNewsHtml().isNotEmpty ?
+    CustomScrollView(
+      slivers: [
+        SliverList(
+            delegate: SliverChildListDelegate([
+              Container(
+                padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+                child: Image.network(
+                  // postData.urlNewsListPhotoSmall(0),
+                  postData.urlNewsListPhotoMedium(0),
+                  // postData.getReadNewsPhoto(),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+                child: Html(
+                  data: postData.getSingleNewsHtml(),
+                ),
+              ),
+            ]
+            )
+        )],
+    )
+    // CustomScrollView(
+    //   slivers: [
+    //   SliverList(
+    //     delegate: SliverChildListDelegate([
+    //     // Html(data: postData.getSingleNewsHtml()),
+    //   Container(
+    //     height: 1000,
+    //     child: WebView(
+    //       initialUrl: 'about:blank',
+    //       javascriptMode: JavascriptMode.unrestricted,
+    //       onWebViewCreated: (controller) async {
+    //         WebViewController _controller = controller;
+    //         _controller.loadUrl(
+    //             Uri.dataFromString(
+    //               await postData.getUrlContentSingleNews(),
+    //                 // postData.repChainNewsHtml[postData.singleNewsIdx],
+    //                 // postData.repChainNewsHtml[idx],
+    //                 mimeType: 'text/html',
+    //                 encoding: Encoding.getByName('utf-8')
+    //             ).toString()
+    //         );
+    //       },
+    //       ),
+    //   )]
+    //   ),
+    //   ),]
+    // )
+        : const Center(
+      child: Text(
+        'Maaf sedang ada perbaikan.',
+        style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
       ),
     );
   }

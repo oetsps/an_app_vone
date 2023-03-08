@@ -106,57 +106,57 @@ class _BeritaViewState extends State<BeritaView> with SingleTickerProviderStateM
                             ],
                           ),
                         ),
-                        SizedBox(
-                          child: PopupMenuButton(
-                            icon: const Icon(Icons.list),
-                            itemBuilder: (context) =>
-                              authC.getLoginStatus() ? popupMenuLoggedIn : popupMenu,
-                            onSelected: (String newValue) {
-                              if (newValue != routeTopik) {
-                                var _change = false;
-                                // Declare as below in case common page applied
-                                switch(newValue) {
-                                  case Routes.HOME:
-                                    anTopik = AppTopik.Berita;
-                                    _change = true;
-                                    break;
-                                  case Routes.BERITA:
-                                    anTopik = AppTopik.Berita;
-                                    _change = true;
-                                    break;
-                                  case Routes.BISNIS:
-                                    anTopik = AppTopik.Ekonomi;
-                                    _change = true;
-                                    break;
-                                  case Routes.SPORT:
-                                    anTopik = AppTopik.Sport;
-                                    _change = true;
-                                    break;
-                                  case Routes.BOLA:
-                                    anTopik = AppTopik.Bola;
-                                    _change = true;
-                                    break;
-                                  case Routes.LIFESTYLE:
-                                    anTopik = AppTopik.Lifestyle;
-                                    _change = true;
-                                    break;
-                                  case Routes.FOTO:
-                                    anTopik = AppTopik.Foto;
-                                    _change = true;
-                                    break;
-                                  default:
-                                    break;
-                                }
-                                if(_change) {
-                                  anPageState = PageTopik(anTopik);
-                                  anSingleNewsView = false;
-                                  anRouteTopik = newValue;
-                                  Get.offAllNamed(newValue);
-                                }
-                              }
-                            }
-                          ),
-                        ),
+                        // SizedBox(
+                        //   child: PopupMenuButton(
+                        //     icon: const Icon(Icons.list),
+                        //     itemBuilder: (context) =>
+                        //       authC.getLoginStatus() ? popupMenuLoggedIn : popupMenu,
+                        //     onSelected: (String newValue) {
+                        //       if (newValue != routeTopik) {
+                        //         var _change = false;
+                        //         // Declare as below in case common page applied
+                        //         switch(newValue) {
+                        //           case Routes.HOME:
+                        //             anTopik = AppTopik.Berita;
+                        //             _change = true;
+                        //             break;
+                        //           case Routes.BERITA:
+                        //             anTopik = AppTopik.Berita;
+                        //             _change = true;
+                        //             break;
+                        //           case Routes.BISNIS:
+                        //             anTopik = AppTopik.Ekonomi;
+                        //             _change = true;
+                        //             break;
+                        //           case Routes.SPORT:
+                        //             anTopik = AppTopik.Sport;
+                        //             _change = true;
+                        //             break;
+                        //           case Routes.BOLA:
+                        //             anTopik = AppTopik.Bola;
+                        //             _change = true;
+                        //             break;
+                        //           case Routes.LIFESTYLE:
+                        //             anTopik = AppTopik.Lifestyle;
+                        //             _change = true;
+                        //             break;
+                        //           case Routes.FOTO:
+                        //             anTopik = AppTopik.Foto;
+                        //             _change = true;
+                        //             break;
+                        //           default:
+                        //             break;
+                        //         }
+                        //         if(_change) {
+                        //           anPageState = PageTopik(anTopik);
+                        //           anSingleNewsView = false;
+                        //           anRouteTopik = newValue;
+                        //           Get.offAllNamed(newValue);
+                        //         }
+                        //       }
+                        //     }
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

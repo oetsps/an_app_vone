@@ -2,16 +2,11 @@ import 'package:get/get.dart';
 
 import '../modules/berita/bindings/berita_binding.dart';
 import '../modules/berita/views/berita_view.dart';
-import '../modules/bisnis/bindings/bisnis_binding.dart';
-import '../modules/bisnis/views/bisnis_view.dart';
-import '../modules/bola/bindings/bola_binding.dart';
-import '../modules/bola/views/bola_view.dart';
 import '../modules/english/bindings/english_binding.dart';
 import '../modules/english/views/english_view.dart';
 import '../modules/foto/bindings/foto_binding.dart';
 import '../modules/foto/views/foto_view.dart';
 import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
 import '../modules/infografik/bindings/infografik_binding.dart';
 import '../modules/infografik/views/infografik_view.dart';
 import '../modules/lifestyle/bindings/lifestyle_binding.dart';
@@ -21,11 +16,9 @@ import '../modules/login/views/login_view.dart';
 import '../modules/more/bindings/more_binding.dart';
 import '../modules/more/views/more_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
-import '../modules/profile/views/profile_view.dart';
+import '../modules/profile/views/profile_antara.dart';
 import '../modules/signup/bindings/signup_binding.dart';
-import '../modules/signup/views/signup_view.dart';
-import '../modules/sport/bindings/sport_binding.dart';
-import '../modules/sport/views/sport_view.dart';
+import '../modules/signup/views/signup_antara.dart';
 import '../modules/video/bindings/video_binding.dart';
 import '../modules/video/views/video_view.dart';
 
@@ -107,12 +100,14 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      // page: () => const ProfileView(),
+      page: () => const Profile(),
       binding: ProfileBinding(),
     ),
     GetPage(
       name: _Paths.SIGNUP,
-      page: () => SignupView(),
+      // page: () => SignupView(),
+      page: () => SignUp(),
       binding: SignupBinding(),
     ),
     GetPage(
