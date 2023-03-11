@@ -1,9 +1,13 @@
+import 'package:an_app_vone/app/routes/app_pages.dart';
 import 'package:an_app_vone/app/routes/search_initialpage.dart';
 import 'package:an_app_vone/app/routes/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../modules/home/views/rubrik_antara.dart';
 import '../modules/login/views/login_antara.dart';
+import 'app_menu.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -33,12 +37,16 @@ class BottomBar extends StatelessWidget {
                       child: GestureDetector(
                         // onTap: () {},
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const RubrikView(),
-                            ),
-                          );
+                          anTopik = AppTopik.Berita;
+                          anRouteTopik = Routes.BERITA;
+                          anPageState = PageTopik(anTopik);
+                          Get.offAllNamed(anRouteTopik);
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const RubrikView(),
+                          //   ),
+                          // );
                         },
                         child: Column(
                             children: [

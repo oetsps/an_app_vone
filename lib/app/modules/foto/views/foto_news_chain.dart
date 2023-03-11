@@ -1,32 +1,25 @@
-import 'dart:convert';
-// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_html/flutter_html.dart';
-import '../../../data/mockdata/singlenews_dummy.dart';
-import '../../../routes/app_bottom_bar.dart';
 import '../../../routes/app_menu.dart';
 import '../../login/views/login_antara.dart';
-import '../../resource/color.dart';
-import '../views/berita_repository.dart';
+import './foto_repository.dart';
 
-class NewsChain extends StatelessWidget {
-  const NewsChain({Key? key, required this.label,}) : super(key: key);
+class FotoNewsChain extends StatelessWidget {
+  const FotoNewsChain({Key? key, required this.label,}) : super(key: key);
 
   final String label;
 
   @override
   Widget build(BuildContext context) {
-    final postData = Provider.of<DataHome>(context);
+    final postData = Provider.of<DataFoto>(context);
     Size screenSize() {
       return MediaQuery.of(context).size;
     }
     return SliverList(
       delegate: SliverChildListDelegate([
         const SizedBox(height: 8),
-        // for (int i = 9; i < (postData.loading ? 5 : postData.getNewListLength()); i++)
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10 ; i++)
           Column(
             children: [
               SizedBox(
@@ -40,21 +33,21 @@ class NewsChain extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: postData.loading ?
-                      Image.asset(
-                        'assets/images/antara.png',
-                        alignment: Alignment.center,
-                      )
-                          : GestureDetector(
-                        // onTap: () {},
-                        onTap: () => {
-                          postData.setSingleNewsView(i)
-                        },
-                        child: Image.network(
-                          postData.urlNewsListPhotoSmall(i),
-                          alignment:Alignment.center,
-                          fit: BoxFit.fill,
+                        Image.asset(
+                          'assets/images/antara.png',
+                          alignment: Alignment.center,
+                        )
+                        : GestureDetector(
+                          // onTap: () {},
+                          onTap: () => {
+                            postData.setSingleNewsView(i)
+                          },
+                          child: Image.network(
+                            postData.urlNewsListPhotoSmall(i),
+                            alignment:Alignment.center,
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
                     ),
                     const SizedBox(width: 8,),
                     Expanded(
@@ -169,7 +162,7 @@ class SingleNewsView extends StatelessWidget {
     // required this.idx,
   }) : super(key: key);
 
-  final DataHome postData;
+  final DataFoto postData;
   // final int idx;
 
   @override

@@ -68,10 +68,10 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FOTO,
-      // page: () => FotoView(),
-      // binding: FotoBinding(),
-      page: () => const BeritaView(),
-      binding: BeritaBinding(),
+      page: () => FotoView(),
+      binding: FotoBinding(),
+      // page: () => const BeritaView(),
+      // binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.VIDEO,
@@ -80,8 +80,10 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.INFOGRAFIK,
-      page: () => InfografikView(),
-      binding: InfografikBinding(),
+      // page: () => InfografikView(),
+      // binding: InfografikBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.ENGLISH,
@@ -90,8 +92,10 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MORE,
-      page: () => MoreView(),
-      binding: MoreBinding(),
+      // page: () => MoreView(),
+      // binding: MoreBinding(),
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,

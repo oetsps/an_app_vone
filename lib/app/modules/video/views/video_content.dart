@@ -6,12 +6,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../routes/app_menu.dart';
 import '../../login/views/login_antara.dart';
-import '../views/berita_repository.dart';
-import './berita_news_chain.dart';
+import './video_repository.dart';
+import './video_news_chain.dart';
 
 
-class HomeNewsList extends StatelessWidget {
-  const HomeNewsList({
+class VideoNewsList extends StatelessWidget {
+  const VideoNewsList({
     Key? key,
     required TabController tabController,
     required this.tabList,
@@ -30,21 +30,173 @@ class HomeNewsList extends StatelessWidget {
         // for (String str in tabList)
         ...tabList.map((label) => Builder(
             builder: (context) {
-              final postData = Provider.of<DataHome>(context);
+              final postData = Provider.of<DataVideo>(context);
               postData.setSubTopik(label);
               Size screenSize() {
                 return MediaQuery.of(context).size;
               }
-              // postData.getReadNewsData();
               return Builder(
                   builder: (context) {
                     return postData.getSingleNewsView() ?
                     Builder(
-                        builder: (context) {return SingleNewsView(postData: postData);})
-                        : CustomScrollView(
+                        builder: (context) {return SingleNewsView(postData: postData);}
+                    )
+                        : postData.curSubTopik == "Video" ?
+                    CustomScrollView(
+                        slivers: [
+                          const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
+                          SliverGrid(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 1,
+                              childAspectRatio: (screenSize().width - 16*2) / 192,
+                            ),
+                            delegate: SliverChildBuilderDelegate (
+                                  (context, index) {
+                                late WebViewController _controller;
+                                postData.setSubTopik(label);
+                                return postData.loading ?
+                                SizedBox(
+                                  height: screenSize().width / 1.52,
+                                  child: SpinKitThreeBounce(
+                                    duration: const Duration(seconds: 1),
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: index.isEven ? Colors.grey[600] : Colors.grey[200],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                                    : GridTile(
+                                  footer: SizedBox(
+                                    height: 67,
+                                    child: Row(
+                                      children: [
+                                        SizedBox(width: 32,),
+                                        Container(
+                                          padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                          width: 253,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                height: 30,
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  postData.getNewsListTitle(index),
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 4,),
+                                              Container(
+                                                height: 14,
+                                                alignment: Alignment.centerLeft,
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 40,
+                                                      child: Text(
+                                                        postData.getNewsListCategory(index),
+                                                        style: TextStyle(
+                                                          fontSize: 9,
+                                                          color: anTabBarColor[TopikCategory[postData.topik.index]],
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 2),
+                                                    GestureDetector(
+                                                      onTap: (() => Navigator.of(context).push(MaterialPageRoute(
+                                                          builder: (BuildContext context) {
+                                                            return const Login();
+                                                          }
+                                                      ))),
+                                                      child: SizedBox(
+                                                        width: 14,
+                                                        child: Image.asset(
+                                                          'assets/icons/ic_heart.png',
+                                                          fit: BoxFit.contain,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 2),
+                                                    SizedBox(
+                                                      width: 14,
+                                                      child: Image.asset(
+                                                        'assets/icons/ic_chat.png',
+                                                        fit: BoxFit.contain,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 2),
+                                                    SizedBox(
+                                                      width: 14,
+                                                      child: Image.asset(
+                                                        'assets/icons/ic_send.png',
+                                                        fit: BoxFit.contain,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Container(),
+                                                    ),
+                                                    const Icon(
+                                                      Icons.access_time,
+                                                      color: Colors.white,
+                                                      size: 14,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 36,
+                                                      child: Text(
+                                                        '17 Menit',
+                                                        style: TextStyle(
+                                                          fontSize: 9,
+                                                          color: Colors.white,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  child: Container(
+                                    height: 192,
+                                    width: screenSize().width,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                    ),
+                                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8,),
+                                    child: GestureDetector(
+                                      onTap: () => {postData.setSingleNewsView(index)},
+                                      child: Image.network(
+                                        postData.urlNewsListPhotoMedium(index),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              childCount: 10,
+                            ),
+                          ),
+                        ]
+                    )
+
+                    : CustomScrollView(
                       slivers: [
                         const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
-
                         SliverGrid(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 1,
@@ -192,9 +344,6 @@ class HomeNewsList extends StatelessWidget {
                             childCount: 1,
                           ),
                         ),
-
-                        const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
-
                         SliverGrid.count(
                           crossAxisCount: 2,
                           // mainAxisSpacing: 8.0,
@@ -221,16 +370,43 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(1)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(1),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
+                                  Stack(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 90,
+                                        width: screenSize().width,
+                                        child: GestureDetector(
+                                          onTap: () => {postData.setSingleNewsView(1)},
+                                          child: Image.network(
+                                            postData.urlNewsListPhotoSmall(1),
+                                            // postData.getReadNewsPhoto(),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                      SizedBox(
+                                        height: 30,
+                                        child: Row(
+                                          children: [
+                                            const SizedBox(width: 8),
+                                            Container(
+                                              width: 30,
+                                              color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                              padding: EdgeInsets.all(5),
+                                              child: GestureDetector(
+                                                onTap: () {},
+                                                child: Image.asset(
+                                                  'assets/icons/Play.png',
+                                                  fit: BoxFit.contain,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(child: Container()),
+                                          ],
+                                        ),
+                                      ),
+                                    ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -254,7 +430,7 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
                                                   postData.getNewsListCategory(1),
@@ -343,16 +519,43 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(2)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(2),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                  Stack(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 90,
+                                          width: screenSize().width,
+                                          child: GestureDetector(
+                                            onTap: () => {postData.setSingleNewsView(2)},
+                                            child: Image.network(
+                                              postData.urlNewsListPhotoSmall(2),
+                                              // postData.getReadNewsPhoto(),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                width: 30,
+                                                color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                                padding: EdgeInsets.all(5),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: Image.asset(
+                                                    'assets/icons/Play.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -365,7 +568,7 @@ class HomeNewsList extends StatelessWidget {
                                             height: 28,
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              postData.getNewsListTitle(2),
+                                              postData.getNewsListTitle(1),
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10,
@@ -376,10 +579,10 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
-                                                  postData.getNewsListCategory(2),
+                                                  postData.getNewsListCategory(1),
                                                   style: TextStyle(
                                                     fontSize: 8,
                                                     // color: Colors.red,
@@ -465,16 +668,42 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(3)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(3),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                  Stack(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 90,
+                                          child: GestureDetector(
+                                            onTap: () => {postData.setSingleNewsView(3)},
+                                            child: Image.network(
+                                              postData.urlNewsListPhotoSmall(3),
+                                              // postData.getReadNewsPhoto(),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                width: 30,
+                                                color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                                padding: EdgeInsets.all(5),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: Image.asset(
+                                                    'assets/icons/Play.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -487,7 +716,7 @@ class HomeNewsList extends StatelessWidget {
                                             height: 28,
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              postData.getNewsListTitle(3),
+                                              postData.getNewsListTitle(1),
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10,
@@ -498,10 +727,10 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
-                                                  postData.getNewsListCategory(3),
+                                                  postData.getNewsListCategory(1),
                                                   style: TextStyle(
                                                     fontSize: 8,
                                                     // color: Colors.red,
@@ -587,16 +816,42 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(4)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(4),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                  Stack(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 90,
+                                          child: GestureDetector(
+                                            onTap: () => {postData.setSingleNewsView(4)},
+                                            child: Image.network(
+                                              postData.urlNewsListPhotoSmall(4),
+                                              // postData.getReadNewsPhoto(),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                width: 30,
+                                                color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                                padding: EdgeInsets.all(5),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: Image.asset(
+                                                    'assets/icons/Play.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -609,7 +864,7 @@ class HomeNewsList extends StatelessWidget {
                                             height: 28,
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              postData.getNewsListTitle(4),
+                                              postData.getNewsListTitle(1),
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10,
@@ -620,10 +875,10 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
-                                                  postData.getNewsListCategory(4),
+                                                  postData.getNewsListCategory(1),
                                                   style: TextStyle(
                                                     fontSize: 8,
                                                     // color: Colors.red,
@@ -692,26 +947,22 @@ class HomeNewsList extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
-
                         SliverList(
                           delegate: SliverChildListDelegate([
                             const SizedBox(height: 8,),
                             SizedBox(
                               height: 20,
                               child: Row(
-                                children: [
-                                  const SizedBox(width: 16,),
-                                  const Text("Populer di ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                  Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                children: const [
+                                  SizedBox(width: 16,),
+                                  Text("Video of The Day", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                                 ],
                               ),
                             ),
                             const SizedBox(height: 8,),
                           ]),
                         ),
-
                         SliverGrid.count(
                           crossAxisCount: 2,
                           // mainAxisSpacing: 8.0,
@@ -738,16 +989,43 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(5)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(5),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                  Stack(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 90,
+                                          width: screenSize().width,
+                                          child: GestureDetector(
+                                            onTap: () => {postData.setSingleNewsView(5)},
+                                            child: Image.network(
+                                              postData.urlNewsListPhotoSmall(5),
+                                              // postData.getReadNewsPhoto(),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                width: 30,
+                                                color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                                padding: EdgeInsets.all(5),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: Image.asset(
+                                                    'assets/icons/Play.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -760,7 +1038,7 @@ class HomeNewsList extends StatelessWidget {
                                             height: 28,
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              postData.getNewsListTitle(5),
+                                              postData.getNewsListTitle(1),
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10,
@@ -771,10 +1049,10 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
-                                                  postData.getNewsListCategory(5),
+                                                  postData.getNewsListCategory(1),
                                                   style: TextStyle(
                                                     fontSize: 8,
                                                     // color: Colors.red,
@@ -860,16 +1138,43 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(6)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(6),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                  Stack(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 90,
+                                          width: screenSize().width,
+                                          child: GestureDetector(
+                                            onTap: () => {postData.setSingleNewsView(6)},
+                                            child: Image.network(
+                                              postData.urlNewsListPhotoSmall(6),
+                                              // postData.getReadNewsPhoto(),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                width: 30,
+                                                color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                                padding: EdgeInsets.all(5),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: Image.asset(
+                                                    'assets/icons/Play.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -882,7 +1187,7 @@ class HomeNewsList extends StatelessWidget {
                                             height: 28,
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              postData.getNewsListTitle(6),
+                                              postData.getNewsListTitle(1),
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10,
@@ -893,10 +1198,10 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
-                                                  postData.getNewsListCategory(6),
+                                                  postData.getNewsListCategory(1),
                                                   style: TextStyle(
                                                     fontSize: 8,
                                                     // color: Colors.red,
@@ -982,16 +1287,42 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(7)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(7),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                  Stack(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 90,
+                                          child: GestureDetector(
+                                            onTap: () => {postData.setSingleNewsView(7)},
+                                            child: Image.network(
+                                              postData.urlNewsListPhotoSmall(7),
+                                              // postData.getReadNewsPhoto(),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                width: 30,
+                                                color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                                padding: EdgeInsets.all(5),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: Image.asset(
+                                                    'assets/icons/Play.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -1004,7 +1335,7 @@ class HomeNewsList extends StatelessWidget {
                                             height: 28,
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              postData.getNewsListTitle(7),
+                                              postData.getNewsListTitle(1),
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10,
@@ -1015,10 +1346,10 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
-                                                  postData.getNewsListCategory(7),
+                                                  postData.getNewsListCategory(1),
                                                   style: TextStyle(
                                                     fontSize: 8,
                                                     // color: Colors.red,
@@ -1104,16 +1435,42 @@ class HomeNewsList extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 16),
                               child: Column(
                                 children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () => {postData.setSingleNewsView(8)},
-                                      child: Image.network(
-                                        postData.urlNewsListPhotoSmall(8),
-                                        // postData.getReadNewsPhoto(),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    // color: Colors.grey[300],
+                                  Stack(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 90,
+                                          child: GestureDetector(
+                                            onTap: () => {postData.setSingleNewsView(8)},
+                                            child: Image.network(
+                                              postData.urlNewsListPhotoSmall(8),
+                                              // postData.getReadNewsPhoto(),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                width: 30,
+                                                color: Color.fromARGB(0xFF, 0x11, 0x10, 0x10),
+                                                padding: EdgeInsets.all(5),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: Image.asset(
+                                                    'assets/icons/Play.png',
+                                                    fit: BoxFit.contain,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                   SizedBox(
                                     height: 50,
@@ -1126,7 +1483,7 @@ class HomeNewsList extends StatelessWidget {
                                             height: 28,
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              postData.getNewsListTitle(8),
+                                              postData.getNewsListTitle(1),
                                               style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 10,
@@ -1137,10 +1494,10 @@ class HomeNewsList extends StatelessWidget {
                                           Row(
                                             children: [
                                               SizedBox(
-                                                width: 46,
+                                                width: 40,
                                                 child: Text(
                                                   // postData.getReadNewsCategory(),
-                                                  postData.getNewsListCategory(8),
+                                                  postData.getNewsListCategory(1),
                                                   style: TextStyle(
                                                     fontSize: 8,
                                                     // color: Colors.red,
@@ -1209,9 +1566,7 @@ class HomeNewsList extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         const SliverPadding(padding: EdgeInsets.symmetric(vertical: 2)),
-
                         SliverList(
                           delegate: SliverChildListDelegate([
                             const SizedBox(height: 8,),
@@ -1228,14 +1583,14 @@ class HomeNewsList extends StatelessWidget {
                             const SizedBox(height: 8,),
                           ]),
                         ),
-
                         Builder(
                             builder: (context) {
-                              return NewsChain(label: label);
+                              return VideoNewsChain(label: label);
                             }
                         ),
                       ],
                     );
+                    //    }
                   }
               );
             }
@@ -1245,47 +1600,3 @@ class HomeNewsList extends StatelessWidget {
     );
   }
 }
-
-// class TopNewsPage extends StatelessWidget {
-//   const TopNewsPage({
-//     Key? key,
-//     required this.url,
-//     // required this.postData,
-//     // required this.idx,
-//   }) : super(key: key);
-//
-//   final String url;
-//   // final DataHome postData;
-//   // final int idx;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // final postData = Provider.of<DataHome>(context, listen: false);
-//     return Scaffold(
-//       appBar: AppBar(
-//           backgroundColor: const Color.fromARGB(255, 172, 7, 7),
-//           centerTitle: true,
-//           foregroundColor: Colors.white,
-//           title: SizedBox(
-//               width: 200,
-//               child: Image.asset('assets/images/antara_bg.png',)
-//           )
-//       ),
-//       body: WebView(
-//         initialUrl: 'about:blank',
-//         javascriptMode: JavascriptMode.unrestricted,
-//         onWebViewCreated: (controller) {
-//           WebViewController _controller = controller;
-//           _controller.loadUrl(
-//               Uri.dataFromString(
-//                   url,
-//                   // postData.repChainNewsHtml[idx],
-//                   mimeType: 'text/html',
-//                   encoding: Encoding.getByName('utf-8')
-//               ).toString()
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }

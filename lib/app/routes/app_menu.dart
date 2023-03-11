@@ -50,6 +50,9 @@ Map<String,Color> anTabBarColor = {
   'Bola': Color.fromARGB(0xFF, 0x47, 0x6B, 0x7A),
   'Lifestyle': Color.fromARGB(0xFF, 0x08, 0x8F, 0xFA),
   'Foto': Color.fromARGB(0xFF, 0x7E, 0xA8, 0x29),
+  'Video': Color.fromARGB(0xFF, 0x9F, 0x49, 0xBD),
+  'Infografik': Color.fromARGB(0xFF, 0xE1, 0xAF, 0x2F),
+  'More': Color.fromARGB(0xFF, 0x5B, 0x75, 0x86),
 };
 
 
@@ -85,19 +88,19 @@ List<List<String>> menuSubTopik = const [
     ["Foto", "Foto Hardnews", "Photo Stories"],
     [
       "Video",
-      "Top News",
+      // "Top News",
       "Indonesia Terkini",
       "Kilas Nusantara",
       "Kabar Dunia",
       "Podcast",
-      "Feature",
-      "Int`l Corner",
+      "Featured",
+      "International Corner",
       "30 Menit",
       "Antarakita",
       "Lifestyle",
-      "Sport Antara"
+      "Sport Arena"
     ],
-    ["Infografik", "Reserved"],
+    ["Infografik", /*"Reserved"*/],
     [
       "English",
       "Current Issue",
@@ -113,12 +116,13 @@ List<List<String>> menuSubTopik = const [
     [
       "More",
       "Komunitas",
-      "Antarakita",
-      "Podcast",
+      // "Antarakita",
+      // "Podcast",
       "Antara Iteraktif",
       "Anti Hoaks",
       "Jobs",
-      "Artikel"
+      "Artikel",
+      "Rilis Pers"
     ],
     ["Login"],
     [
@@ -169,19 +173,19 @@ class PageTopik {
     ["Foto", "Foto Hardnews", "Photo Stories"],
     [
       "Video",
-      "Top News",
+      // "Top News",
       "Indonesia Terkini",
       "Kilas Nusantara",
       "Kabar Dunia",
       "Podcast",
-      "Feature",
-      "Int`l Corner",
+      "Featured",
+      "International Corner",
       "30 Menit",
       "Antarakita",
       "Lifestyle",
-      "Sport Antara"
+      "Sport Arena"
     ],
-    ["Infografik", "Reserved"],
+    ["Infografik",/* "Reserved"*/],
     [
       "English",
       "Current Issue",
@@ -197,12 +201,13 @@ class PageTopik {
     [
       "More",
       "Komunitas",
-      "Antarakita",
-      "Podcast",
+      // "Antarakita",
+      // "Podcast",
       "Antara Iteraktif",
       "Anti Hoaks",
       "Jobs",
-      "Artikel"
+      "Artikel",
+      "Rilis Pers"
     ],
     ["Login"],
     [

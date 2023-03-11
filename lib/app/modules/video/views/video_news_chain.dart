@@ -1,24 +1,18 @@
-import 'dart:convert';
-// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_html/flutter_html.dart';
-import '../../../data/mockdata/singlenews_dummy.dart';
-import '../../../routes/app_bottom_bar.dart';
 import '../../../routes/app_menu.dart';
 import '../../login/views/login_antara.dart';
-import '../../resource/color.dart';
-import '../views/berita_repository.dart';
+import './video_repository.dart';
 
-class NewsChain extends StatelessWidget {
-  const NewsChain({Key? key, required this.label,}) : super(key: key);
+class VideoNewsChain extends StatelessWidget {
+  const VideoNewsChain({Key? key, required this.label,}) : super(key: key);
 
   final String label;
 
   @override
   Widget build(BuildContext context) {
-    final postData = Provider.of<DataHome>(context);
+    final postData = Provider.of<DataVideo>(context);
     Size screenSize() {
       return MediaQuery.of(context).size;
     }
@@ -26,7 +20,7 @@ class NewsChain extends StatelessWidget {
       delegate: SliverChildListDelegate([
         const SizedBox(height: 8),
         // for (int i = 9; i < (postData.loading ? 5 : postData.getNewListLength()); i++)
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10 ; i++)
           Column(
             children: [
               SizedBox(
@@ -169,7 +163,7 @@ class SingleNewsView extends StatelessWidget {
     // required this.idx,
   }) : super(key: key);
 
-  final DataHome postData;
+  final DataVideo postData;
   // final int idx;
 
   @override
@@ -203,7 +197,7 @@ class SingleNewsView extends StatelessWidget {
             )
         )],
     )
-        : const Center(
+    : const Center(
       child: Text(
         'Maaf sedang ada perbaikan.',
         style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),

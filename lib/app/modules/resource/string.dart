@@ -42,7 +42,7 @@ class StringClass {
   static String LIFESTYLE_GRID_TITLE_TEXT = "Lifestyle";
   static String FOTO_GRID_TITLE_TEXT = "Foto";
   static String VIDEO_GRID_TITLE_TEXT = "Video";
-  static String ANTARA_GRAFIK_GRID_TITLE_TEXT = "AntaraGrafik";
+  static String ANTARA_GRAFIK_GRID_TITLE_TEXT = "Infografik";
   static String MORE_GRID_TITLE_TEXT = "More";
   static String FILTER_TEXT = "Filter";
   static String URUTKAN_TEXT = "Urutkan";

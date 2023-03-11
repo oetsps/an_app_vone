@@ -85,6 +85,18 @@ class _RubrikViewState extends State<RubrikView> {
                                   anTopik = AppTopik.Foto;
                                   anRouteTopik = Routes.FOTO;
                                   break;
+                                case 6:
+                                  anTopik = AppTopik.Video;
+                                  anRouteTopik = Routes.VIDEO;
+                                  break;
+                                case 7:
+                                  anTopik = AppTopik.Infografik;
+                                  anRouteTopik = Routes.INFOGRAFIK;
+                                  break;
+                                case 8:
+                                  anTopik = AppTopik.More;
+                                  anRouteTopik = Routes.MORE;
+                                  break;
                                 default:
                                   reDirect = false;
                                   break;
